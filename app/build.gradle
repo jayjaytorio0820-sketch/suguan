@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.jj.suguan'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.jj.suguan'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    signingConfigs {
+        jj {
+            storeFile file('suguan.jks')
+            storePassword 'suguan2026'
+            keyAlias 'suguan'
+            keyPassword 'suguan2026'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.jj
+        }
+        debug {
+            signingConfig signingConfigs.jj
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}

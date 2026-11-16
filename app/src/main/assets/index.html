@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suguan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0b6b3a;--g2:#0e8a4a;--gl:#e7f4ec;--gm:#bfe2cc;--r:#c8102e;--rl:#fdecee;--rm:#f5b8c1;--y:#9a6b00;--yl:#fff7e0;--bl:#1d5fbf;--bll:#eaf2fd;
+--bg:#f3f6f4;--ink:#15231b;--mut:#62736a;--line:#dde7e1;--sh:0 1px 3px rgba(16,40,28,.06),0 6px 18px rgba(16,40,28,.05)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:transparent}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:84px}
+button{font-family:inherit;cursor:pointer}
+.hide{display:none!important}
+
+/* top */
+.top{background:linear-gradient(160deg,#0d7a43,#0a5f33);color:#fff;padding:14px 16px 16px}
+.top .brand{display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:auto}
+.top .brand b{font-size:13px;letter-spacing:2.5px;font-weight:800;opacity:.9;display:flex;align-items:center;gap:8px}
+.flag{display:inline-flex;width:22px;height:14px;border-radius:3px;overflow:hidden}.flag i{flex:1}.flag i:nth-child(1){background:#18a058}.flag i:nth-child(2){background:#fff}.flag i:nth-child(3){background:var(--r)}
+.top .ic{width:38px;height:38px;border-radius:12px;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:17px}
+.tri{display:flex;height:5px}.tri i{flex:1}.tri i:nth-child(1){background:#18a058}.tri i:nth-child(2){background:#fff}.tri i:nth-child(3){background:var(--r)}
+.wrap{max-width:760px;margin:auto;padding:0 14px}
+.pagehd{max-width:760px;margin:12px auto 0}
+.pagehd h1{font-size:22px;font-weight:800}
+.pagehd p{font-size:13px;opacity:.85;margin-top:3px}
+
+/* date header (home) */
+.dhd{max-width:760px;margin:12px auto 0;display:flex;align-items:center;gap:10px}
+.dhd .arr{width:40px;height:40px;border-radius:12px;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:22px;flex:none}
+.dhd .mid{flex:1;text-align:center}
+.dhd .mid small{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;background:#fff;color:var(--g);margin-bottom:6px}
+.dhd .mid small.past{background:rgba(255,255,255,.25);color:#fff}
+.dhd .mid small.now{background:var(--r);color:#fff}
+.dhd .mid h2{font-size:21px;font-weight:800;line-height:1.2}
+.dhd .mid p{font-size:12.5px;opacity:.85;margin-top:3px}
+
+/* sunday strip */
+.strip{display:flex;gap:6px;overflow-x:auto;padding:14px 14px 4px;max-width:760px;margin:auto;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.sd{flex:none;width:58px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:7px 0 6px;text-align:center;color:var(--ink);position:relative}
+.sd small{display:block;font-size:10px;font-weight:700;color:var(--mut);text-transform:uppercase}
+.sd b{display:block;font-size:19px;line-height:1.15}
+.sd i{display:block;font-style:normal;font-size:9.5px;font-weight:700;color:var(--g)}
+.sd.past{background:#f4f6f5;color:#8a9a91}.sd.past i{color:#9aa8a0}
+.sd.now{border-color:var(--r)}
+.sd.sel{background:var(--g);border-color:var(--g);color:#fff}.sd.sel small,.sd.sel i{color:#d9f0e2}
+.sd .dot{position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--r)}
+.sd.none{opacity:.45}
+
+/* summary */
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.sum div{background:#fff;border-radius:14px;padding:10px 8px;text-align:center;box-shadow:var(--sh);font-size:11px;font-weight:600;color:var(--mut)}
+.sum div b{display:block;font-size:22px;font-weight:800}
+.sum .ok b{color:var(--g)}.sum .ab b{color:var(--r)}.sum .mv b{color:var(--bl)}
+.alertbar{background:var(--rl);color:var(--r);border:1px solid var(--rm);border-radius:12px;padding:10px 12px;font-size:12.5px;font-weight:600;margin-bottom:10px}
+
+/* reminder */
+.remind{background:linear-gradient(135deg,#fff,#fff6f7);border:2px solid var(--r);border-radius:16px;padding:14px;margin:12px 0;box-shadow:var(--sh)}
+.remind .rt{font-size:15.5px;font-weight:800;color:var(--r)}
+.remind .rs{font-size:12.5px;color:var(--ink);margin:5px 0 2px;line-height:1.45}
+.remind .rb{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.remind .rb .btn{padding:11px 12px;font-size:13px;min-width:130px}
+.remind.soft{border-color:#e6c46a;background:var(--yl)}.remind.soft .rt{color:var(--y)}
+.agtools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.agtools button{flex:1;min-width:120px;border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:9px 8px;font-size:12px;font-weight:700;color:var(--g)}
+.agtools button:disabled{opacity:.4}
+.agcols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.agcols>div{display:grid;gap:5px;align-content:start}
+.ag{display:flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:5px 7px;text-align:left;color:var(--ink);min-width:0}
+.ag .ix{font-size:10px;font-weight:800;color:var(--mut);width:14px;flex:none}
+.ag .av{width:26px;height:26px;font-size:9.5px}
+.ag .nm{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ag.ch{background:var(--yl);border-color:#e6c46a}
+.ag.pk{border-color:var(--g);background:var(--gl);box-shadow:0 0 0 2px var(--g)}
+.demo{background:#1d5fbf;color:#fff;font-size:11.5px;font-weight:800;text-align:center;padding:7px;border-radius:10px;margin-bottom:10px;letter-spacing:.3px}
+/* set colours */
+.av.s0,.av.a{background:#0b6b3a}.av.s1,.av.b{background:#c8102e}.av.s2{background:#1d5fbf}.av.s3{background:#b7791f}.av.s4{background:#7b3fb5}.av.s5{background:#0f8b8d}.av.s6{background:#c0428a}.av.s7{background:#4a5568}
+.t0,.a{color:#0b6b3a}.t1,.b{color:#c8102e}.t2{color:#1d5fbf}.t3{color:#b7791f}.t4{color:#7b3fb5}.t5{color:#0f8b8d}.t6{color:#c0428a}.t7{color:#4a5568}
+td .t0,td .t1,td .t2,td .t3,td .t4,td .t5,details .in [class^=t]{font-weight:600}
+.setb{font-size:10px;font-weight:800;padding:2px 6px;border-radius:6px;background:#f1f4f2;margin-left:4px;vertical-align:1px}
+.dk .dn{flex:1;font-weight:700;font-size:15px;border:0;background:none;text-align:left;color:var(--ink);padding:2px 0}
+.dk .dn .ed{font-size:12px;color:#a8b5ae}
+.slot{font-size:11px;font-weight:800;color:var(--g);background:var(--gl);padding:3px 8px;border-radius:99px}
+.slot.cus{background:#1d5fbf;color:#fff}
+.dk.short .slot{background:var(--rl);color:var(--r)}
+body.holding .dk .slot{display:none}
+.slotpick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slotpick button{border:2px solid var(--line);background:#fff;border-radius:14px;padding:12px 0;font-size:24px;font-weight:800;color:var(--ink)}
+.slotpick button small{display:block;font-size:11px;font-weight:600;color:var(--mut)}
+.slotpick button.on{border-color:var(--g);background:var(--gl);color:var(--g)}
+.rn{margin-top:14px}.rnr{display:flex;gap:8px}.rnr input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font:14px Inter,sans-serif;outline:none}.rnr input:focus{border-color:var(--g)}
+.rnpop{position:fixed;inset:0;z-index:75;background:rgba(10,30,20,.4);display:flex;align-items:center;justify-content:center;padding:20px}
+.rnbox{background:#fff;border-radius:18px;padding:16px;width:100%;max-width:380px}.rnbox b{font-size:15px}
+.rnbox input{width:100%;margin-top:10px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font:15px Inter,sans-serif;outline:none}.rnbox input:focus{border-color:var(--g)}
+.agcols{overflow-x:auto}
+.agcol{display:grid;gap:5px;align-content:start}
+.aghd{display:flex;align-items:center;gap:6px;font-size:12px;padding:2px 2px 4px}.aghd span{color:var(--mut);font-weight:700}
+.agx{margin-left:auto;border:0;background:var(--rl);color:var(--r);border-radius:8px;width:24px;height:24px;font-size:12px}
+.ag{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab}
+.ag .nm{flex:1}
+.agE{border:0;background:none;color:#a8b5ae;font-size:13px;padding:2px 4px;flex:none}
+.ag.drop{border-color:var(--g);background:var(--gl);box-shadow:0 0 0 2px var(--g)}
+.ag.lift{opacity:.3}
+.addset{width:100%;border:1.5px dashed var(--gm);background:#f7fbf8;color:var(--g);border-radius:12px;padding:11px;font-size:13px;font-weight:700;margin-top:10px}
+.addset:disabled{opacity:.4}
+.dkl{display:grid;gap:6px}
+.dkr{display:flex;align-items:center;gap:8px;background:#f7faf8;border-radius:12px;padding:6px 8px}
+.dkr .no{width:24px;height:24px;border-radius:7px;background:var(--gl);color:var(--g);font-size:11px;font-weight:800;display:grid;place-items:center;flex:none}
+.dkr input{flex:1;min-width:0;border:1.5px solid transparent;background:#fff;border-radius:9px;padding:7px 9px;font:600 13.5px Inter,sans-serif;outline:none}.dkr input:focus{border-color:var(--g)}
+.dkr .dkname{flex:1;font-weight:600;font-size:13.5px}
+.stp{display:flex;align-items:center;gap:4px;flex:none}
+.stp button{width:32px;height:32px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font-size:17px;font-weight:700;color:var(--g)}
+.stp b{width:22px;text-align:center;font-size:15px}
+.lnk{border:0;background:none;color:var(--r);font-size:11.5px;font-weight:700}
+/* help */
+.help{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:var(--sh);margin-bottom:12px;border-left:4px solid var(--g)}
+.help .hh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.help .hh b{font-size:13.5px;color:var(--g)}
+.help .x{border:0;background:none;color:var(--mut);font-size:16px}
+.help ul{list-style:none;display:grid;gap:7px}
+.help li{display:flex;gap:10px;align-items:center;font-size:12.5px;line-height:1.35}
+.help li span{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gl);display:grid;place-items:center;font-size:15px}
+.help li em{font-style:normal;font-weight:700}
+
+/* dako list */
+.list{display:grid;gap:10px}
+@media(min-width:640px){.list{grid-template-columns:1fr 1fr}}
+.dk{background:#fff;border-radius:16px;box-shadow:var(--sh);overflow:hidden;border:2px solid transparent;transition:border-color .15s,background .15s}
+.dk .dh{display:flex;align-items:center;gap:10px;padding:10px 12px 8px}
+.dk .no{width:26px;height:26px;border-radius:8px;background:var(--gl);color:var(--g);font-size:12px;font-weight:800;display:grid;place-items:center;flex:none}
+.dk .dn{flex:1;font-weight:700;font-size:15px}
+.dk .cnt{font-size:11px;font-weight:700;color:var(--mut)}
+.dk .tagc{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:99px;display:none}
+.dk.empty{border-color:var(--rm)}.dk.empty .dh{background:var(--rl)}
+/* hold colours */
+body.holding .dk.c-new{border-color:#2fa866;background:#f1faf4}
+body.holding .dk.c-new .tagc{display:inline-block;background:var(--g);color:#fff}
+body.holding .dk.c-old{border-color:var(--r);background:#fff6f7}
+body.holding .dk.c-old .tagc{display:inline-block;background:var(--r);color:#fff}
+body.holding .dk.c-here{border-color:#9aa8a0}
+body.holding .dk.c-here .tagc{display:inline-block;background:#62736a;color:#fff}
+body.holding .dk .cnt{display:none}
+.dk.drop{outline:3px dashed var(--g);outline-offset:-5px}
+body.holding .dk.c-old.drop{outline-color:var(--r)}
+
+.p{display:flex;align-items:center;gap:10px;padding:9px 12px;border-top:1px solid #eef3f0;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.p.dr{cursor:grab}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none;color:#fff}
+.av.a{background:var(--g)}.av.b{background:var(--r)}
+.pi{flex:1;min-width:0}
+.pn{font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps{font-size:11.5px;color:var(--mut);margin-top:1px}
+.p.off .pn{text-decoration:line-through;color:#9aa8a0}.p.off .av{opacity:.4}
+.p.off .ps{color:var(--r);font-weight:600}
+.p.in{background:var(--yl)}.p.in .ps{color:var(--y);font-weight:600}
+.p.mv{background:var(--bll)}.p.mv .ps{color:var(--bl);font-weight:600}
+.p .ps.warn{color:var(--r);font-weight:600}
+.p.lift{opacity:.3}
+.pill{border:1.5px solid var(--gm);background:#fff;color:var(--g);border-radius:99px;padding:6px 10px;font-size:11.5px;font-weight:700;flex:none;white-space:nowrap}
+.pill.abs{background:var(--r);border-color:var(--r);color:#fff}
+.pill.undo{border-color:var(--bl);color:var(--bl)}
+.dk .none{padding:12px;font-size:12.5px;color:var(--r);font-weight:600;border-top:1px solid #eef3f0}
+
+.btnrow{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+.btn{border:0;border-radius:13px;padding:13px 16px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:1;min-width:150px}
+.btn.g{background:var(--g);color:#fff}.btn.r{background:var(--r);color:#fff}
+.btn.o{background:#fff;color:var(--g);border:1.5px solid var(--g)}.btn.ro{background:#fff;color:var(--r);border:1.5px solid var(--r)}
+.btn:active,.pill:active,.sd:active{transform:scale(.97)}
+.emptyst{background:#fff;border-radius:16px;padding:30px 20px;text-align:center;color:var(--mut);font-size:13.5px;box-shadow:var(--sh);margin-top:12px}
+.emptyst b{display:block;font-size:30px;margin-bottom:6px}
+
+/* cards / sections */
+.card{background:#fff;border-radius:16px;box-shadow:var(--sh);padding:16px;margin-bottom:12px}
+.card h3{font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px}
+.card .sub{font-size:12.5px;color:var(--mut);margin:4px 0 12px;line-height:1.45}
+.step{width:24px;height:24px;border-radius:8px;background:var(--g);color:#fff;font-size:12px;display:grid;place-items:center;flex:none}
+.step.r{background:var(--r)}
+textarea,input[type=date],input[type=search]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font:14px Inter,sans-serif;color:var(--ink);background:#fff;outline:none}
+textarea:focus,input:focus{border-color:var(--g)}
+textarea{min-height:240px;line-height:1.6;resize:vertical}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.lbl{font-size:12px;font-weight:800;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.lbl .c{font-weight:700}.lbl .c.ok{color:var(--g)}.lbl .c.no{color:var(--r)}
+.setA{color:var(--g)}.setB{color:var(--r)}
+.chk{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;margin:10px 0 2px}
+.chk input{width:20px;height:20px;accent-color:var(--g)}
+.note{background:var(--gl);color:var(--g);border-radius:12px;padding:10px 12px;font-size:12.5px;font-weight:600;line-height:1.45}
+.note.r{background:var(--rl);color:var(--r)}
+
+/* people tab */
+.seg{display:flex;background:#e6ede9;border-radius:13px;padding:4px;margin:12px 0}
+.seg button{flex:1;border:0;background:none;padding:9px;border-radius:10px;font-size:13px;font-weight:700;color:var(--mut)}
+.seg button.on{background:#fff;color:var(--g);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.gl{display:grid;gap:8px}
+@media(min-width:640px){.gl{grid-template-columns:1fr 1fr}}
+.gc{background:#fff;border-radius:14px;box-shadow:var(--sh);padding:11px 12px;display:flex;gap:11px;align-items:center;border:0;text-align:left;width:100%;color:var(--ink)}
+.gc .pi small{display:block;font-size:11.5px;color:var(--mut);margin-top:2px}
+.prog{height:6px;border-radius:99px;background:#e6ede9;margin-top:6px;overflow:hidden}.prog i{display:block;height:100%;background:var(--g);border-radius:99px}
+.gc .rt{text-align:right;font-size:11px;color:var(--mut);font-weight:600}.gc .rt b{display:block;font-size:15px;color:var(--g)}
+details{background:#fff;border-radius:14px;box-shadow:var(--sh);margin-bottom:8px;overflow:hidden}
+summary{padding:13px 14px;font-weight:700;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary span{font-size:11.5px;color:var(--mut);font-weight:600}
+details .in{padding:0 14px 12px;font-size:13px;line-height:1.75}
+details .in .a{color:var(--g);font-weight:600}details .in .b{color:var(--r);font-weight:600}
+
+.abcard{background:#fff;border-radius:16px;box-shadow:var(--sh);padding:14px;margin-bottom:10px}
+.abh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.abh b{font-size:14.5px}
+.mini{display:flex;background:#e6ede9;border-radius:10px;padding:3px}
+.mini button{border:0;background:none;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;color:var(--mut)}
+.mini button.on{background:#fff;color:var(--r);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.pnav{display:flex;align-items:center;gap:10px;margin:12px 0 10px}
+.pnav button{width:38px;height:38px;border-radius:11px;border:1.5px solid var(--line);background:#fff;color:var(--g);font-size:19px;flex:none}
+.pnav div{flex:1;text-align:center}.pnav b{display:block;font-size:16px;text-transform:capitalize}.pnav small{font-size:11.5px;color:var(--mut)}
+.abstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.abstats div{background:#f4f7f5;border-radius:12px;padding:9px 6px;text-align:center;font-size:11px;font-weight:600;color:var(--mut)}
+.abstats b{display:block;font-size:20px;color:var(--ink)}.abstats .r b{color:var(--r)}
+.abn{min-width:54px;text-align:center;border-radius:12px;padding:6px 4px;font-size:10.5px;font-weight:700;background:#f1faf4;color:var(--g);flex:none}
+.abn b{display:block;font-size:18px;line-height:1.1}
+.abn.has{background:var(--rl);color:var(--r)}
+.abt{width:100%;border-collapse:collapse;font-size:12.5px;border-radius:12px;overflow:hidden}
+.abt td,.abt th{padding:8px 10px;border-bottom:1px solid #eef3f0;position:static;background:none;color:var(--ink);font-weight:600;text-align:left}
+.abt th{font-size:11px;color:var(--mut);font-weight:800}
+.abt td.n{text-align:right;font-weight:800}.abt td.n.has{color:var(--r)}
+.abt tr.cur td{background:#f4f7f5}
+/* matrix */
+.tblw{overflow:auto;border-radius:14px;box-shadow:var(--sh);background:#fff}
+table{border-collapse:collapse;font-size:12px;min-width:100%}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-right:1px solid #eef3f0;white-space:nowrap;text-align:left;vertical-align:top}
+th{background:var(--g);color:#fff;font-weight:700;position:sticky;top:0}
+th small{display:block;font-weight:500;opacity:.85}
+th.cur{background:var(--r)}td.cur{background:#fff8f8}
+td.f,th.f{position:sticky;left:0;z-index:2}td.f{background:#fff;font-weight:700;color:var(--g)}
+td .a{color:var(--g);font-weight:600}td .b{color:var(--r);font-weight:600}td s{opacity:.45}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.checks div{background:var(--gl);border-radius:12px;padding:10px 12px;font-size:12px;color:var(--g);font-weight:600}
+.checks div.bad{background:var(--rl);color:var(--r)}.checks b{display:block;font-size:16px}
+
+/* bottom nav */
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}
+.nav div{display:flex;max-width:760px;width:100%}
+.nav button{flex:1;border:0;background:none;padding:9px 4px 10px;font-size:11px;font-weight:700;color:#8a9a91;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav button svg{width:23px;height:23px}
+.nav button.on{color:var(--g)}
+.nav button.on svg{stroke:var(--g)}
+
+/* sheet / modal */
+.sheetbg{position:fixed;inset:0;background:rgba(10,30,20,.45);z-index:60;display:flex;align-items:flex-end;justify-content:center;animation:fd .15s}
+@keyframes fd{from{opacity:0}}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:8px 16px 26px;max-height:88vh;overflow:auto;animation:up .2s}
+@keyframes up{from{transform:translateY(40px)}}
+.grab{width:40px;height:5px;border-radius:9px;background:#d6dfda;margin:4px auto 12px}
+.shh{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.shh .av{width:46px;height:46px;font-size:15px}
+.shh b{display:block;font-size:17px}.shh span{font-size:12.5px;color:var(--mut)}
+.sec{font-size:11px;font-weight:800;color:var(--mut);letter-spacing:.7px;margin:14px 0 7px;display:flex;justify-content:space-between}
+.legend{display:flex;gap:12px;font-size:11px;font-weight:600;color:var(--mut);margin-bottom:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:4px;margin-right:4px;vertical-align:-1px}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dg>*{border:1.5px solid #2fa866;background:#f1faf4;color:var(--g);border-radius:11px;padding:8px;font-size:12px;font-weight:700;text-align:left;line-height:1.25}
+.dg>* small{display:block;font-size:10px;font-weight:600;opacity:.85}
+.dg>.old{border-color:var(--r);background:#fff3f4;color:var(--r)}
+.dg>.here{border-color:#9aa8a0;background:#f2f4f3;color:#4c5c54}
+.dg button{cursor:pointer}
+.acts{display:grid;gap:8px;margin-top:14px}
+.acts button{border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:13px 14px;font-size:14px;font-weight:700;text-align:left;display:flex;gap:10px;align-items:center;color:var(--ink)}
+.acts button.r{color:var(--r);border-color:var(--rm)}
+.acts button.g{color:var(--g);border-color:var(--gm)}
+.tl{display:grid;gap:5px}
+.tl div{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:#f4f7f5;font-size:13px}
+.tl div b{width:62px;flex:none;color:var(--g);font-size:12px}
+.tl div.ab{background:var(--rl)}.tl div.ab span{color:var(--r);font-weight:600}
+.tl div.fu{background:#fff;border:1.5px dashed var(--gm)}
+.tl div em{font-style:normal;font-size:11px;color:var(--mut);margin-left:auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stats div{background:#f4f7f5;border-radius:12px;padding:9px;text-align:center;font-size:11px;font-weight:600;color:var(--mut)}
+.stats b{display:block;font-size:19px;color:var(--g)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .w{font-size:10.5px;font-weight:800;color:var(--mut);text-align:center;padding:4px 0}.cal .w.s{color:var(--r)}
+.cal .c{aspect-ratio:1;border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:#b7c3bc}
+.cal .c.sun{background:var(--gl);color:var(--g);font-weight:800;cursor:pointer}
+.cal .c.sun i{font-style:normal;font-size:8.5px}
+.cal .c.sun.no{background:#f2f4f3;color:#a3b0a9;cursor:default}
+.cal .c.td{box-shadow:inset 0 0 0 2px var(--r)}
+.cal .c.sl{background:var(--g);color:#fff}
+.calh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.calh b{font-size:16px;color:var(--g);text-transform:capitalize}
+.calh button{width:38px;height:38px;border-radius:11px;border:1.5px solid var(--line);background:#fff;color:var(--g);font-size:19px}
+
+/* hold peek */
+.peek{position:fixed;left:50%;top:10px;transform:translate(-50%,-16px);opacity:0;pointer-events:none;z-index:70;width:min(94vw,440px);background:#fff;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.3);padding:12px 14px 14px;transition:.16s}
+.peek.show{opacity:1;transform:translate(-50%,0)}
+.peek .shh{margin-bottom:8px}.peek .shh .av{width:40px;height:40px}
+.peek.mini .tl,.peek.mini .sec.h{display:none}
+.ghost{position:fixed;left:0;top:0;pointer-events:none;z-index:80;background:var(--g);color:#fff;padding:9px 14px;border-radius:12px;font-size:13px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.25);transform:translate(-50%,-140%);display:none;white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(30px);opacity:0;background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;transition:.25s;z-index:90;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ============ HOME ============ -->
+<section id="v-home">
+  <div class="top">
+    <div class="brand"><b><span class="flag"><i></i><i></i><i></i></span>SUGUAN</b><button class="ic" id="openCal" aria-label="Kalendaryo">📅</button></div>
+    <div class="dhd">
+      <button class="arr" id="prevW" aria-label="Nakaraang Linggo">‹</button>
+      <div class="mid"><small id="hBadge"></small><h2 id="hDate"></h2><p id="hSub"></p></div>
+      <button class="arr" id="nextW" aria-label="Susunod na Linggo">›</button>
+    </div>
+  </div>
+  <div class="tri"><i></i><i></i><i></i></div>
+  <div class="strip" id="strip"></div>
+  <div class="wrap">
+    <div id="homeBody"></div>
+  </div>
+</section>
+
+<!-- ============ MGA GURO ============ -->
+<section id="v-guro" class="hide">
+  <div class="top"><div class="pagehd"><h1>Mga Guro</h1><p>I-tap ang pangalan para makita ang buong history niya.</p></div></div>
+  <div class="tri"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="seg"><button data-s="guro" class="on">👤 Bawat Guro</button><button data-s="linggo">📅 Bawat Linggo</button></div>
+    <div id="g-guro">
+      <div class="abcard">
+        <div class="abh"><b>📊 Bilang ng Absent</b>
+          <div class="mini"><button data-m="month" class="on">Bawat Buwan</button><button data-m="quarter">Bawat Quarter</button></div></div>
+        <div class="pnav"><button id="pPrev">‹</button><div><b id="pLabel"></b><small id="pRange"></small></div><button id="pNext">›</button></div>
+        <div class="abstats" id="abStats"></div>
+        <label class="chk" style="margin:8px 0 0"><input type="checkbox" id="sortAbs">Ipakita muna ang pinakamaraming absent</label>
+      </div>
+      <input type="search" id="q" placeholder="🔎  Hanapin ang pangalan…" style="margin-bottom:10px"><div class="gl" id="gList"></div></div>
+    <div id="g-linggo" class="hide"></div>
+  </div>
+</section>
+
+<!-- ============ BUONG IKOT ============ -->
+<section id="v-ikot" class="hide">
+  <div class="top"><div class="pagehd"><h1>Buong Ikot</h1><p id="ikotSub"></p></div></div>
+  <div class="tri"><i></i><i></i><i></i></div>
+  <div class="wrap" style="padding-top:12px">
+    <div class="note" style="margin-bottom:10px">Bawat <b>kolum</b> ay isang Linggo. Bawat <b>hanay</b> ay isang dako. Pula ang kolum ng Linggong napili mo.</div>
+    <div class="tblw"><table id="matrix"></table></div>
+    <div class="btnrow"><button class="btn g" id="copyAll">📋 Kopyahin ang buong ikot</button></div>
+    <div class="card" style="margin-top:8px"><h3>✅ Pagsusuri</h3><div class="sub">Sinusuri kung tama ang orihinal na rotation ng ikot na ito.</div><div class="checks" id="checks"></div></div>
+  </div>
+</section>
+
+<!-- ============ AYUSIN ============ -->
+<section id="v-ayos" class="hide">
+  <div class="top"><div class="pagehd"><h1>Ayusin</h1><p>Mga pangalan, dako, at pag-reset.</p></div></div>
+  <div class="tri"><i></i><i></i><i></i></div>
+  <div class="wrap" style="padding-top:12px">
+    <div class="card">
+      <h3><span class="step">1</span>Mga Guro, Set, at Dako</h3>
+      <div class="sub">Isang pangalan bawat linya, eksaktong 11 bawat listahan. Kapag pinalitan mo ang pangalan sa parehong linya, susunod din ang history niya.</div>
+      <div class="cols" id="setsBox"></div>
+      <button class="addset" id="addSetA" style="margin-top:10px">➕ Magdagdag ng Set</button>
+      <div style="margin-top:14px"><div class="lbl"><span>📍 11 NA DAKO</span><span class="c" id="cD"></span></div><textarea id="taD" style="min-height:200px"></textarea></div>
+      <div class="btnrow"><button class="btn g" id="saveNames">💾 I-save</button><button class="btn o" id="sample">↺ Gamitin ang sample</button></div>
+    </div>
+
+    <div class="card">
+      <h3>👥 Ilang Guro bawat Dako</h3>
+      <div class="sub">Halimbawa, 3 sa kapilya. Kapag mas marami ang kailangan, kusang kukuha ng guro mula sa ibang dako (iniikot kung alin ang mababawasan).</div>
+      <div class="dkl" id="slotList"></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="step r">2</span>🔄 I-reset ang Suguan (bawat quarter)</h3>
+      <div class="sub">Babalik sa <b>Linggo 1</b> ang rotation simula sa petsang pipiliin mo. <b>Maiiwan ang history</b>, kaya makikita pa rin kung saan nasugo ang bawat guro dati.</div>
+      <div class="lbl"><span>SIMULA NG BAGONG SUGUAN (Linggo)</span></div>
+      <input type="date" id="resetDate">
+      <label class="chk"><input type="checkbox" id="resetShuffle">Haluin din ang ayos ng mga pangalan</label>
+      <div class="note" id="curStart" style="margin-top:10px"></div>
+      <div class="btnrow"><button class="btn r" id="resetSuguan">🔄 I-reset ang Suguan</button></div>
+    </div>
+
+    <div class="card">
+      <h3>💾 Backup ng Data</h3>
+      <div class="sub">Naka-save sa phone ang lahat ng data. Gumawa ng backup paminsan-minsan (hal. i-send sa sarili sa Messenger o i-save sa Notes) para hindi mawala kapag napalitan ang phone o na-uninstall ang app.</div>
+      <div class="btnrow" style="margin-top:0"><button class="btn o" id="bkCopy">📤 Gumawa ng Backup</button></div>
+      <textarea id="bkText" style="min-height:90px;margin-top:10px" placeholder="I-paste dito ang backup para maibalik…"></textarea>
+      <div class="btnrow"><button class="btn o" id="bkLoad">📥 Ibalik mula sa Backup</button></div>
+    </div>
+
+    <div class="card">
+      <h3>🧪 Subukan ang Paalala</h3>
+      <div class="sub">Ipakita ang lalabas na paalala kapag natapos na ang 11 Linggo ng ikot. Demo lang ito, walang mababago.</div>
+      <div class="btnrow" style="margin-top:0"><button class="btn o" id="tryRemind">🎉 Ipakita ang 11-Linggo na Paalala</button></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="step" style="background:#62736a">3</span>🗑 I-reset ang History</h3>
+      <div class="sub">Buburahin ang <b>lahat</b> ng naitalang suguan, absent, at paglipat. Gamitin lang kung talagang kailangan. Hindi na ito maibabalik.</div>
+      <div class="btnrow"><button class="btn ro" id="resetHist">🗑 Burahin ang History</button></div>
+    </div>
+  </div>
+</section>
+
+<nav class="nav"><div>
+  <button data-t="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Suguan</button>
+  <button data-t="guro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M17 14.3c2.4.2 4 1.8 4.6 4.7"/></svg>Mga Guro</button>
+  <button data-t="ikot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M8 13h2M14 13h2M8 17h2M14 17h2"/></svg>Buong Ikot</button>
+  <button data-t="ayos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Ayusin</button>
+</div></nav>
+
+<div id="sheetHost"></div>
+<div class="peek" id="peek"></div>
+<div class="ghost" id="ghost"></div>
+<div class="toast" id="toast"></div>
+<script>
+const SAMPLE_A=["Juan Dela Cruz","Pedro Santos","Jose Reyes","Mark Villanueva","Carlo Mendoza","Ramon Garcia","Paolo Bautista","Daniel Aquino","Joshua Ramos","Miguel Torres","Andres Castillo"];
+const SAMPLE_B=["Rafael Navarro","Noel Fernandez","Arnel Domingo","Jerome Pascual","Kevin Salazar","Ronald Morales","Edwin Valdez","Bryan Cruz","Allan Gonzales","Vincent Lopez","Gabriel Manalo"];
+const SAMPLE_D=["Bagong Silang","Camarin","Deparo","Bagumbong","Tala","Amparo","Llano","Kaybiga","Novaliches","Sangandaan","Grace Park"];
+const N=11, DAY=864e5;
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const parse=s=>new Date(s+"T00:00");
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+const sunOnOrAfter=d=>addDays(d,(7-d.getDay())%7);
+const sunOnOrBefore=d=>addDays(d,-d.getDay());
+const fmt=(s,o={month:"long",day:"numeric",year:"numeric"})=>parse(s).toLocaleDateString("fil-PH",o);
+const mod=x=>((x%N)+N)%N;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ini=n=>n.split(/\s+/).filter(Boolean).map(w=>w[0]).slice(0,2).join("").toUpperCase();
+
+// default start: 3 Sundays ago (so history has sample entries)
+let S={sets:[[...SAMPLE_A],[...SAMPLE_B]],D:[...SAMPLE_D],start:iso(addDays(sunOnOrBefore(today()),-21)),history:{},absent:{}};
+try{const s=JSON.parse(localStorage.getItem("suguan2")||"null");
+  if(s){if(!s.sets&&s.A&&s.B)s.sets=[s.A,s.B];delete s.A;delete s.B;
+    if(s.sets&&s.sets.length&&s.sets.every(x=>x.length===N))S={...S,...s}}}catch(e){}
+const SL=i=>String.fromCharCode(65+i); // set letter
+const persist=()=>{try{localStorage.setItem("suguan2",JSON.stringify(S))}catch(e){}};
+
+/* Rotation for a Sunday: w = weeks since start, cycle = floor(w/11), r = w%11.
+   Dako d gets A[d-r] and B[d-k*r], k = 2 + cycle%9.
+   Within each 11-week cycle: every name visits all 11 dako once, no A–B pair repeats. */
+/* Set s moves by step m_s = 1 + (cycle+s)%10 each week. Distinct steps (mod 11 prime) =>
+   every name visits all 11 dako once per cycle and no two people are paired twice. Up to 10 sets. */
+function compute(dateIso){
+  const w=Math.round((parse(dateIso)-parse(S.start))/DAY/7);
+  if(w<0) return null;
+  const cycle=Math.floor(w/N), r=w%N;
+  return {cycle,r,list:S.D.map((d,i)=>({dako:d,ppl:S.sets.map((arr,s)=>arr[mod(i-(1+(cycle+s)%10)*r)])}))};
+}
+function getSuguan(dateIso){
+  if(S.history[dateIso]) return {...S.history[dateIso],locked:true};
+  if(S.histFrom&&dateIso<S.histFrom) return null;
+  return compute(dateIso);
+}
+// lock every Sunday from start up to today into history
+function lockPast(){
+  const t=today();let d=parse(S.histFrom&&S.histFrom>S.start?S.histFrom:S.start);let changed=false;
+  while(d<=t){const k=iso(d);if(!S.history[k]){const c=compute(k);if(c){c.slots={...(S.slots||{})};S.history[k]=c;changed=true}}d=addDays(d,7)}
+  if(changed)persist();
+}
+
+/* Adjusted suguan for a Sunday, after absences.
+   - Absent person is removed from his dako.
+   - If a dako ends up with nobody, one person is borrowed from a dako that still has 2,
+     preferring someone who has NOT been to that dako recently. */
+let memo={};
+// how many guro a dako needs (default = number of sets)
+const slotsOf=(dako,nS,snap)=>((snap||S.slots||{})[dako])||nS||S.sets.length;
+const ACT=["","pamalit","inilipat"];
+const active=r=>r.people.filter(p=>ACT.includes(p.tag));
+// Sundays of the same 11-week cycle before date k
+function priorInCycle(k){
+  const w=Math.round((parse(k)-parse(S.start))/DAY/7);if(w<0)return [];
+  const c0=w-w%N,out=[];
+  for(let i=c0;i<w;i++)out.push(iso(addDays(parse(S.start),i*7)));
+  return out;
+}
+// minimum-cost assignment (Hungarian), returns col for each row
+function hungarian(c){
+  const n=c.length,u=Array(n+1).fill(0),v=Array(n+1).fill(0),p=Array(n+1).fill(0),way=Array(n+1).fill(0);
+  for(let i=1;i<=n;i++){p[0]=i;let j0=0;const minv=Array(n+1).fill(Infinity),used=Array(n+1).fill(false);
+    do{used[j0]=true;const i0=p[j0];let d=Infinity,j1=0;
+      for(let j=1;j<=n;j++)if(!used[j]){const cur=c[i0-1][j-1]-u[i0]-v[j];if(cur<minv[j]){minv[j]=cur;way[j]=j0}if(minv[j]<d){d=minv[j];j1=j}}
+      for(let j=0;j<=n;j++){if(used[j]){u[p[j]]+=d;v[j]-=d}else minv[j]-=d}
+      j0=j1}while(p[j0]!==0);
+    do{const j1=way[j0];p[j0]=p[j1];j0=j1}while(j0)}
+  const ans=Array(n);for(let j=1;j<=n;j++)ans[p[j]-1]=j-1;return ans;
+}
+function final(k){
+  if(memo[k])return memo[k];
+  const g=getSuguan(k);if(!g)return null;
+  if(!S.absent)S.absent={};if(!S.moves)S.moves={};
+  // 1) what each person already did this cycle (actual, after moves)
+  const seen={};
+  priorInCycle(k).forEach(d=>{const f=final(d);if(f)f.rows.forEach(r=>active(r).forEach(p=>{(seen[p.name]=seen[p.name]||new Set()).add(r.dako)}))});
+  const been=(n,d)=>!!(seen[n]&&seen[n].has(d));
+  const rows=g.list.map(x=>({dako:x.dako,people:(x.ppl||[x.a,x.b]).map((n,s)=>({name:n,set:SL(s),tag:""}))}));
+  const nS=rows[0]?rows[0].people.length:0;
+  // 2) auto-fix: re-assign each set so nobody REPEATS a dako this cycle (keeps the original rotation when possible)
+  Array.from({length:nS},(_,i)=>i).forEach(si=>{
+    const names=rows.map(r=>r.people[si].name);
+    const cost=names.map((n,i)=>rows.map((r,j)=>(been(n,r.dako)?1000:0)+(i===j?0:1)));
+    if(names.every((n,i)=>!been(n,rows[i].dako)))return;
+    const asg=hungarian(cost);
+    asg.forEach((j,i)=>{rows[j].people[si]={name:names[i],set:SL(si),tag:"",fix:i!==j,rep:been(names[i],rows[j].dako)}});
+  });
+  // 3) absences
+  const abs=new Set(S.absent[k]||[]);
+  rows.forEach(r=>r.people.forEach(p=>{if(abs.has(p.name))p.tag="absent"}));
+  // 4) manual moves (drag & drop)
+  const mv=S.moves[k]||{};
+  Object.entries(mv).forEach(([name,to])=>{
+    const from=rows.find(r=>r.people.some(p=>p.name===name&&p.tag===""));
+    const dest=rows.find(r=>r.dako===to);
+    if(!from||!dest||from===dest)return;
+    const p=from.people.find(p=>p.name===name&&p.tag==="");
+    p.tag="lumipat";p.to=to;
+    dest.people.push({name,set:p.set,tag:"inilipat",from:from.dako});
+  });
+  // 5) fill slots: empty dako first, then dako that need more guro (e.g. kapilya = 3)
+  const snap=g.locked?(g.slots||{}):S.slots; // past Sundays keep the slot rules they had
+  const need=r=>slotsOf(r.dako,nS,snap);
+  const skip=new Set();
+  for(let guard=0;guard<80;guard++){
+    const recv=rows.filter(r=>!skip.has(r)&&active(r).length<need(r))
+      .sort((x,y)=>(active(x).length?1:0)-(active(y).length?1:0)||need(y)-need(x))[0];
+    if(!recv)break;
+    const canGive=d=>d!==recv&&active(d).some(p=>p.tag==="")&&
+      (active(d).length>need(d)||(active(d).length>=2&&(active(recv).length===0||need(d)<need(recv))));
+    const donors=rows.map((d,i)=>({d,i})).filter(o=>canGive(o.d));
+    if(!donors.length){skip.add(recv);continue}
+    donors.sort((x,y)=>(active(y.d).length-need(y.d))-(active(x.d).length-need(x.d))||mod(x.i+g.r*4)-mod(y.i+g.r*4));
+    const d=donors[0].d;
+    const cand=active(d).filter(p=>p.tag==="").sort((p,q)=>been(p.name,recv.dako)-been(q.name,recv.dako))[0];
+    const why=active(recv).length?"slot":"empty";
+    cand.tag="lumipat";cand.to=recv.dako;cand.auto=true;
+    recv.people.push({name:cand.name,set:cand.set,tag:"pamalit",from:d.dako,why});
+  }
+  return memo[k]={...g,rows,abs,moved:Object.keys(mv).length};
+}
+function moveTo(k,name,to){
+  if(!S.moves)S.moves={};
+  const f=final(k);
+  // original (pre-move) dako of this person
+  const orig=f.rows.find(r=>r.people.some(p=>p.name===name&&(p.tag===""||p.tag==="lumipat")));
+  const m={...(S.moves[k]||{})};
+  if(orig&&orig.dako===to)delete m[name];else m[name]=to;
+  if(Object.keys(m).length)S.moves[k]=m;else delete S.moves[k];
+  persist();memo={};
+}
+// where was a person on a given Sunday (after adjustments)
+function whereIs(f,name){
+  if(f.abs.has(name)){const r=f.rows.find(r=>r.people.some(p=>p.name===name));return {absent:true,dako:r.dako}}
+  for(const r of f.rows){const p=active(r).find(p=>p.name===name);if(p)return {dako:r.dako,tag:p.tag,from:p.from,kasama:active(r).filter(q=>q.name!==name).map(q=>q.name).join(", ")||"(mag-isa)"}}
+  return null;
+}
+
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1900)}
+const NATIVE=window.SuguanAndroid||null; // present inside the APK
+async function copy(txt){
+  if(NATIVE){try{NATIVE.copy(txt);toast("Nakopya na ✓ — i-paste sa GC");return}catch(e){}}
+  try{await navigator.clipboard.writeText(txt);toast("Nakopya na ✓")}catch(e){toast("Hindi makopya sa device na ito")}}
+function buzz(ms){try{if(NATIVE)NATIVE.vibrate(ms);else navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
+function dayText(k){const f=final(k);if(!f)return "";
+  let t=`SUGUAN — Linggo, ${fmt(k)}\n(Ika-${f.r+1} na Linggo sa 11)\n\n`+f.rows.map((r,i)=>`${i+1}. ${r.dako}\n`+(active(r).length?active(r).map(p=>`   • ${p.name}${p.tag==="pamalit"?" (pamalit)":p.tag==="inilipat"?" (inilipat)":""}`).join("\n"):"   • —")).join("\n");
+  if(f.abs.size)t+=`\n\nAbsent: ${[...f.abs].join(", ")}`;
+  return t}
+
+
+/* =================== UI =================== */
+let sel=iso(sunOnOrAfter(today()));
+const nextSun=()=>iso(sunOnOrAfter(today()));
+const short=k=>fmt(k,{month:"short",day:"numeric"});
+const sIdx=n=>S.sets.findIndex(a=>a.includes(n));
+const setOf=n=>{const i=sIdx(n);return i<0?"?":SL(i)};
+const sc=set=>"s"+Math.max(0,set.charCodeAt(0)-65)%8;   // colour class
+const tc=set=>"t"+Math.max(0,set.charCodeAt(0)-65)%8;
+const avatar=(n,set)=>`<div class="av ${sc(set||setOf(n))}">${ini(n)}</div>`;
+const allNames=()=>S.sets.flat();
+const nS=()=>S.sets.length;
+const needOf=d=>slotsOf(d,nS());
+function refresh(){memo={};lockPast();renderHome();renderGuro();renderLinggo();renderIkot();renderAyos()}
+function shuf(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* --- who went where in the current suguan (since last reset) before date k --- */
+function periodDates(k){
+  const out=[];const from=S.histFrom&&S.histFrom>S.start?S.histFrom:S.start;
+  let d=parse(from);while(iso(d)<k){out.push(iso(d));d=addDays(d,7)}return out;
+}
+function beenMap(name,k){const m={};periodDates(k).forEach(d=>{const f=final(d);if(!f)return;const w=whereIs(f,name);if(w&&!w.absent)m[w.dako]=d});return m}
+function records(name,k){
+  const ds=[...new Set([...Object.keys(S.history),...periodDates(k)])].filter(d=>d<k).sort().reverse();
+  return ds.map(d=>{const f=final(d);const w=f&&whereIs(f,name);return w?{k:d,...w}:null}).filter(Boolean);
+}
+function rel(k){const t=iso(today());if(k===t)return["Ngayong Linggo","now"];if(k===nextSun())return["Susunod na Linggo","now"];return k<t?["Nakaraan","past"]:["Darating",""]}
+
+/* --- RENAME (keeps history, absences, moves, slots in sync) --- */
+function renameGuro(oldN,newN){
+  newN=newN.trim();if(!newN||newN===oldN)return false;
+  if(allNames().includes(newN)){toast("May guro nang ganyang pangalan");return false}
+  S.sets=S.sets.map(a=>a.map(n=>n===oldN?newN:n));
+  Object.values(S.history).forEach(h=>h.list.forEach(x=>{if(x.ppl)x.ppl=x.ppl.map(n=>n===oldN?newN:n);if(x.a===oldN)x.a=newN;if(x.b===oldN)x.b=newN}));
+  Object.keys(S.absent).forEach(k=>S.absent[k]=S.absent[k].map(n=>n===oldN?newN:n));
+  Object.keys(S.moves).forEach(k=>{const m=S.moves[k];if(m[oldN]!==undefined){m[newN]=m[oldN];delete m[oldN]}});
+  persist();return true;
+}
+function renameDako(oldD,newD){
+  newD=newD.trim();if(!newD||newD===oldD)return false;
+  if(S.D.includes(newD)){toast("May dako nang ganyang pangalan");return false}
+  S.D=S.D.map(d=>d===oldD?newD:d);
+  Object.values(S.history).forEach(h=>h.list.forEach(x=>{if(x.dako===oldD)x.dako=newD}));
+  Object.values(S.moves).forEach(m=>Object.keys(m).forEach(n=>{if(m[n]===oldD)m[n]=newD}));
+  if(S.slots&&S.slots[oldD]){S.slots[newD]=S.slots[oldD];delete S.slots[oldD]}
+  persist();return true;
+}
+
+/* ================= HOME ================= */
+function renderHome(){
+  const g=getSuguan(sel),[bt,bc]=rel(sel);
+  $("hBadge").textContent=bt;$("hBadge").className=bc;
+  $("hDate").textContent=fmt(sel,{month:"long",day:"numeric",year:"numeric"});
+  $("hSub").textContent=g?`Linggo ${g.r+1} sa 11 ng ikot`:"Wala pang suguan";
+  renderStrip();
+  const rb=reminderBanner();
+  if(!g){$("homeBody").innerHTML=rb+`<div class="emptyst"><b>📭</b>Walang suguan sa Linggong ito.<br>Nagsisimula ang kasalukuyang suguan sa <b>${fmt(S.start)}</b>.</div>`;return}
+  const f=final(sel);
+  const nAct=f.rows.reduce((n,r)=>n+active(r).length,0);
+  const snap=g.locked?(g.slots||{}):null;
+  const short1=f.rows.filter(r=>active(r).length<(snap?slotsOf(r.dako,(g.list[0].ppl||[0,0]).length,snap):needOf(r.dako))).length;
+  let h=rb+`<div class="sum"><div class="ok"><b>${nAct}</b>Nakasugo</div><div class="ab"><b>${f.abs.size}</b>Absent</div><div class="mv"><b>${f.moved}</b>Inilipat</div></div>`;
+  if(short1)h+=`<div class="alertbar">⚠ May ${short1} dakong kulang ang guro. I-hold ang isang guro at i-drag doon.</div>`;
+  let hideHelp=false;try{hideHelp=localStorage.getItem("suguanHelp2")==="1"}catch(e){}
+  if(!hideHelp)h+=`<div class="help"><div class="hh"><b>💡 Paano gamitin</b><button class="x" id="hideHelp">✕</button></div><ul>
+    <li><span>👆</span><div><em>I-tap</em> ang guro — ilipat, absent, palitan ang pangalan, o history.</div></li>
+    <li><span>✋</span><div><em>I-hold</em> ang guro — history niya. <b style="color:var(--g)">Green</b> = hindi pa nasusugo roon, <b style="color:var(--r)">Red</b> = nasugo na.</div></li>
+    <li><span>↔️</span><div><em>I-hold at i-drag</em> — ilipat sa ibang dako.</div></li>
+    <li><span>📍</span><div><em>I-tap ang pangalan ng dako</em> — ilang guro ang kailangan (hal. 3 sa kapilya) o palitan ang pangalan.</div></li></ul></div>`;
+  h+=`<div class="list" id="list">${f.rows.map((r,i)=>dakoCard(r,i)).join("")}</div>`;
+  h+=`<div class="btnrow"><button class="btn g" id="copyDay">📋 Kopyahin para sa GC</button>${f.moved?`<button class="btn o" id="undoAll">↺ Ibalik lahat ng inilipat</button>`:""}</div>`;
+  $("homeBody").innerHTML=h;
+}
+function dakoCard(r,i){
+  const g=getSuguan(sel),snap=g&&g.locked?(g.slots||{}):null;
+  const n=active(r).length,need=snap?slotsOf(r.dako,r.people.filter(p=>p.tag!=="pamalit"&&p.tag!=="inilipat").length,snap):needOf(r.dako),kulang=need-n;
+  return `<div class="dk ${n?"":"empty"} ${kulang>0&&n?"short":""}" data-dako="${esc(r.dako)}">
+    <div class="dh"><div class="no">${i+1}</div><button class="dn" data-dk="${esc(r.dako)}">${esc(r.dako)} <span class="ed">✎</span></button><span class="slot ${need!==nS()?"cus":""}">👥 ${n}/${need}</span><span class="tagc"></span></div>
+    ${r.people.map(personRow).join("")}
+    ${kulang>0?`<div class="none">⚠ Kulang ng ${kulang} guro${n?"":" — walang nakasugo"}</div>`:""}
+  </div>`;
+}
+function personRow(p){
+  let cls="p",st="Set "+p.set,btn="";
+  const manual=S.moves&&S.moves[sel]&&S.moves[sel][p.name];
+  if(p.tag==="absent"){cls+=" off";st="Absent sa klase";btn=`<button class="pill abs" data-abs="${esc(p.name)}">✕ Absent</button>`}
+  else if(p.tag==="lumipat"){cls+=" off";st="Inilipat sa "+esc(p.to);btn=manual?`<button class="pill undo" data-undo="${esc(p.name)}">↺ Ibalik</button>`:""}
+  else{
+    if(p.tag==="pamalit"){cls+=" in";st=(p.why==="slot"?"➕ Dagdag na guro galing ":"↩ Pamalit galing ")+esc(p.from)}
+    else if(p.tag==="inilipat"){cls+=" mv";st="🔀 Inilipat galing "+esc(p.from)}
+    else if(p.rep)st=`<span class="ps warn">⚠ Nasugo na rito dati</span>`;
+    else if(p.fix)st="Set "+p.set+" · 🔄 inayos";
+    btn=`<button class="pill" data-abs="${esc(p.name)}">✓ Present</button>`;
+  }
+  const drag=ACT.includes(p.tag);
+  return `<div class="${cls} ${drag?"dr":""}" ${drag?`data-p="${esc(p.name)}"`:""}>${avatar(p.name,p.set)}<div class="pi"><div class="pn">${esc(p.name)}</div><div class="ps">${st}</div></div>${btn}</div>`;
+}
+function renderStrip(){
+  const base=parse(sel),t=iso(today()),nx=nextSun();let h="";
+  for(let i=-6;i<=8;i++){
+    const k=iso(addDays(base,i*7)),g=getSuguan(k);
+    const cls=["sd",k<t?"past":"",k===nx||k===t?"now":"",k===sel?"sel":"",g?"":"none"].join(" ");
+    const mark=(S.absent&&S.absent[k])||(S.moves&&S.moves[k]);
+    h+=`<button class="${cls}" data-d="${k}">${mark?`<span class="dot"></span>`:""}<small>${fmt(k,{month:"short"})}</small><b>${parse(k).getDate()}</b><i>${g?"L"+(g.r+1):"—"}</i></button>`;
+  }
+  $("strip").innerHTML=h;
+  const s=$("strip").querySelector(".sel");if(s)$("strip").scrollLeft=s.offsetLeft-$("strip").clientWidth/2+29;
+}
+function go(k){sel=k;renderHome();try{window.scrollTo({top:0,behavior:"smooth"})}catch(e){}}
+$("prevW").onclick=()=>go(iso(addDays(parse(sel),-7)));
+$("nextW").onclick=()=>go(iso(addDays(parse(sel),7)));
+$("strip").onclick=e=>{const b=e.target.closest("[data-d]");if(b)go(b.dataset.d)};
+$("homeBody").addEventListener("click",e=>{
+  const ab=e.target.closest("[data-abs]"),un=e.target.closest("[data-undo]"),dk=e.target.closest("[data-dk]");
+  if(ab){toggleAbsent(ab.dataset.abs);return}
+  if(un){moveTo(sel,un.dataset.undo,null);refresh();toast("Naibalik sa orihinal na dako");return}
+  if(dk){openDako(dk.dataset.dk);return}
+  const rm=e.target.closest("[data-rm]");if(rm){openArrange(rm.dataset.rm==="reset"?"reset":"cont");return}
+  if(e.target.closest("#copyDay"))copy(dayText(sel));
+  if(e.target.closest("#undoAll")){delete S.moves[sel];persist();refresh();toast("Naibalik ang orihinal na suguan")}
+  if(e.target.closest("#hideHelp")){try{localStorage.setItem("suguanHelp2","1")}catch(x){}renderHome()}
+});
+function toggleAbsent(n){
+  const s=new Set(S.absent[sel]||[]);s.has(n)?s.delete(n):s.add(n);
+  if(s.size)S.absent[sel]=[...s];else delete S.absent[sel];
+  persist();refresh();toast(s.has(n)?`${n}: Absent — na-adjust ang suguan`:`${n}: Present`);
+}
+const _moveTo=moveTo;
+moveTo=function(k,name,to){
+  if(to===null){const m={...(S.moves[k]||{})};delete m[name];if(Object.keys(m).length)S.moves[k]=m;else delete S.moves[k];persist();memo={};return}
+  _moveTo(k,name,to);
+};
+
+/* ================= SHEETS ================= */
+function openSheet(html){
+  $("sheetHost").innerHTML=`<div class="sheetbg" id="sbg"><div class="sheet" id="sheet"><div class="grab"></div>${html}</div></div>`;
+  $("sbg").onclick=e=>{if(e.target.id==="sbg")closeSheet()};
+}
+function closeSheet(){$("sheetHost").innerHTML="";DEMO=false;AR=null}
+function dakoGrid(name,k,clickable){
+  const f=final(k),w=f&&whereIs(f,name),been=beenMap(name,k);
+  return `<div class="legend"><span><i style="background:#2fa866"></i>Hindi pa nasusugo roon</span><span><i style="background:var(--r)"></i>Nasugo na roon</span>${w?`<span><i style="background:#9aa8a0"></i>Narito ngayon</span>`:""}</div>
+  <div class="dg">${S.D.map(d=>{const here=w&&w.dako===d,old=been[d];const tag=clickable?"button":"div";
+    return `<${tag} ${clickable&&!here?`data-to="${esc(d)}"`:""} class="${here?"here":old?"old":""}">${esc(d)}<small>${here?"📍 narito":old?"✓ "+short(old):"bago"}</small></${tag}>`}).join("")}</div>`;
+}
+function renameBox(id,val,label){return `<div class="rn"><div class="lbl"><span>${label}</span></div><div class="rnr"><input id="${id}" value="${esc(val)}"><button class="btn g" id="${id}Go" style="flex:none;min-width:0">I-save</button></div></div>`}
+function openPerson(name){
+  const f=final(sel),w=whereIs(f,name),absent=f.abs.has(name);
+  openSheet(`<div class="shh">${avatar(name)}<div><b>${esc(name)}</b><span>Set ${setOf(name)} · ${absent?"Absent":"nakasugo sa "+esc(w.dako)} · ${short(sel)}</span></div></div>
+    <div class="sec">ILIPAT SA IBANG DAKO <span>i-tap ang dako</span></div>
+    ${dakoGrid(name,sel,!absent)}
+    <div class="acts">
+      <button class="${absent?"g":"r"}" id="aAbs">${absent?"✓ Markahang Present":"✕ Markahang Absent"}</button>
+      <button id="aRen">✏️ Palitan ang pangalan</button>
+      <button id="aProf">👤 Tingnan ang buong history</button>
+    </div><div id="renHost"></div>`);
+  $("sheetHost").querySelectorAll("[data-to]").forEach(b=>b.onclick=()=>{closeSheet();moveTo(sel,name,b.dataset.to);refresh();toast(`${name} → ${b.dataset.to}`)});
+  $("aAbs").onclick=()=>{closeSheet();toggleAbsent(name)};
+  $("aProf").onclick=()=>openProfile(name);
+  $("aRen").onclick=()=>{$("renHost").innerHTML=renameBox("rnIn",name,"BAGONG PANGALAN NG GURO");$("rnIn").focus();
+    $("rnInGo").onclick=()=>{if(renameGuro(name,$("rnIn").value)){closeSheet();refresh();toast("Napalitan ang pangalan ✓")}}};
+}
+function openDako(dako){
+  const cur=needOf(dako);
+  openSheet(`<h3 style="font-size:18px">📍 ${esc(dako)}</h3>
+    <div class="sec">ILANG GURO ANG KAILANGAN DITO? <span>bawat Linggo</span></div>
+    <div class="slotpick">${[1,2,3,4].map(n=>`<button data-n="${n}" class="${n===cur?"on":""}">${n}<small>guro</small></button>`).join("")}</div>
+    <div class="note" style="margin-top:10px">Kapag mas marami ang kailangan (hal. 3 sa kapilya), kusang kukuha ng dagdag na guro mula sa ibang dako — uunahin ang hindi pa nakakapunta rito, at iniikot kung aling dako ang mababawasan.</div>
+    ${renameBox("rdIn",dako,"PALITAN ANG PANGALAN NG DAKO")}`);
+  $("sheetHost").querySelectorAll(".slotpick button").forEach(b=>b.onclick=()=>{setSlots(S,dako,+b.dataset.n);persist();closeSheet();refresh();toast(`${dako}: ${b.dataset.n} guro bawat Linggo`)});
+  $("rdInGo").onclick=()=>{if(renameDako(dako,$("rdIn").value)){closeSheet();refresh();toast("Napalitan ang pangalan ng dako ✓")}};
+}
+function setSlots(obj,dako,n){if(!obj.slots)obj.slots={};if(n===obj.sets.length)delete obj.slots[dako];else obj.slots[dako]=n}
+function openProfile(name){
+  const k1=iso(addDays(today(),1));
+  const recs=records(name,k1),past=recs.filter(r=>!r.absent),absN=recs.length-past.length;
+  const fut=[];for(let i=0;i<4;i++){const k=iso(addDays(sunOnOrAfter(addDays(today(),1)),i*7));const f=final(k);const w=f&&whereIs(f,name);if(w)fut.push({k,...w})}
+  const been=beenMap(name,k1);
+  openSheet(`<div class="shh">${avatar(name)}<div><b>${esc(name)}</b><span>Set ${setOf(name)}</span></div></div>
+    <div class="stats"><div><b>${past.length}</b>Beses nasugo</div><div><b style="color:var(--r)">${absN}</b>Absent</div><div><b>${Object.keys(been).length}/11</b>Dakong napuntahan</div></div>
+    ${absBreakdown(name)}
+    <div class="sec">MGA DAKO MULA SA HULING RESET</div>${dakoGrid(name,k1,false)}
+    ${fut.length?`<div class="sec">SUSUNOD NA SUGUAN</div><div class="tl">${fut.map(r=>tlItem(r,true)).join("")}</div>`:""}
+    <div class="sec">HISTORY</div><div class="tl">${recs.length?recs.map(r=>tlItem(r)).join(""):`<div><span>Wala pang naitalang suguan.</span></div>`}</div>`);
+}
+function tlItem(r,fut){
+  if(r.absent)return `<div class="ab"><b>${short(r.k)}</b><span>❌ Absent</span><em>dapat sa ${esc(r.dako)}</em></div>`;
+  return `<div class="${fut?"fu":""}"><b>${short(r.k)}</b><span>${esc(r.dako)}${r.tag==="inilipat"?" 🔀":r.tag==="pamalit"?" ↩":""}</span><em>${r.tag==="inilipat"||r.tag==="pamalit"?"galing "+esc(r.from):"kasama: "+esc(r.kasama)}</em></div>`;
+}
+/* calendar */
+let calView=new Date(parse(sel));
+function openCal(){calView=new Date(parse(sel));calView.setDate(1);drawCal()}
+function drawCal(){
+  const y=calView.getFullYear(),m=calView.getMonth(),first=new Date(y,m,1),days=new Date(y,m+1,0).getDate(),t=iso(today());
+  let h=["Lin","Lun","Mar","Miy","Huw","Biy","Sab"].map((d,i)=>`<div class="w ${i?"":"s"}">${d}</div>`).join("");
+  for(let i=0;i<first.getDay();i++)h+="<div></div>";
+  for(let d=1;d<=days;d++){const dt=new Date(y,m,d),k=iso(dt);
+    if(dt.getDay()===0){const g=getSuguan(k);h+=`<div class="c sun ${g?"":"no"} ${k===t?"td":""} ${k===sel?"sl":""}" data-d="${k}">${d}${g?`<i>L${g.r+1}</i>`:""}</div>`}
+    else h+=`<div class="c ${k===t?"td":""}">${d}</div>`}
+  openSheet(`<div class="calh"><button id="cp">‹</button><b>${calView.toLocaleDateString("fil-PH",{month:"long",year:"numeric"})}</b><button id="cn">›</button></div><div class="cal">${h}</div><div class="sub" style="margin-top:10px;font-size:12px;color:var(--mut)">I-tap ang isang Linggo (L = pang-ilang Linggo sa ikot).</div>`);
+  $("cp").onclick=()=>{calView.setMonth(m-1);drawCal()};$("cn").onclick=()=>{calView.setMonth(m+1);drawCal()};
+  $("sheetHost").querySelectorAll(".sun[data-d]").forEach(c=>c.onclick=()=>{closeSheet();go(c.dataset.d)});
+}
+$("openCal").onclick=openCal;
+
+/* ================= HOLD-PEEK ================= */
+const ghost=$("ghost"),peek=$("peek");
+function showPeek(name,k,markCards){
+  const recs=records(name,k).slice(0,6),f=final(k),w=f&&whereIs(f,name),been=beenMap(name,k);
+  peek.innerHTML=`<div class="shh">${avatar(name)}<div><b>${esc(name)}</b><span>Set ${setOf(name)} · ${Object.keys(been).length}/11 dakong napuntahan</span></div></div>
+    ${dakoGrid(name,k,false)}
+    <div class="sec h">HULING SUGUAN</div><div class="tl">${recs.length?recs.map(r=>tlItem(r)).join(""):`<div><span>Wala pang nakaraang suguan.</span></div>`}</div>`;
+  peek.classList.add("show");
+  if(markCards){document.body.classList.add("holding");
+    document.querySelectorAll("#list .dk").forEach(c=>{const d=c.dataset.dako;const here=w&&w.dako===d;
+      c.classList.remove("c-new","c-old","c-here");c.classList.add(here?"c-here":been[d]?"c-old":"c-new");
+      c.querySelector(".tagc").textContent=here?"narito siya":been[d]?"nasugo na · "+short(been[d]):"hindi pa nasusugo"})}
+  buzz(20)
+}
+function hidePeek(){peek.classList.remove("show","mini");document.body.classList.remove("holding")}
+
+/* ================= GENERIC PRESS / HOLD / DRAG ENGINE ================= */
+let D=null;
+function dragEngine(o){ // o: root(), item, target, key(el), onTap(el), onHold(el), onDrop(el,target), scroller()
+  const root=o.root;
+  const at=(x,y)=>{const v=ghost.style.display;ghost.style.display="none";const el=document.elementFromPoint(x,y);ghost.style.display=v;return el&&el.closest(o.target)};
+  const begin=()=>{D.on=true;D.el.classList.add("lift");if(!D.held){D.held=true;o.onHold(D.el)}peek.classList.add("mini");ghost.textContent="↔ "+o.key(D.el);ghost.style.display="block";ghost.style.left=D.x+"px";ghost.style.top=D.y+"px";loop()};
+  const mv=(x,y)=>{D.x=x;D.y=y;ghost.style.left=x+"px";ghost.style.top=y+"px";const t=at(x,y);document.querySelectorAll(".drop").forEach(e=>e!==t&&e.classList.remove("drop"));if(t&&t!==D.el)t.classList.add("drop")};
+  const end=()=>{if(!D||D.o!==o)return;clearTimeout(D.timer);const st=D;D=null;
+    const t=st.on?at(st.x,st.y):null;
+    ghost.style.display="none";st.el.classList.remove("lift");document.querySelectorAll(".drop").forEach(e=>e.classList.remove("drop"));hidePeek();
+    if(st.on){if(t&&t!==st.el)o.onDrop(st.el,t)}else if(!st.held&&!st.moved)o.onTap(st.el)};
+  const loop=()=>{if(!D||!D.on)return;const sc=o.scroller(),m=90;
+    if(sc===window){if(D.y<m)window.scrollBy(0,-12);else if(D.y>innerHeight-m)window.scrollBy(0,12)}
+    else{const r=sc.getBoundingClientRect();if(D.y<r.top+m)sc.scrollTop-=12;else if(D.y>r.bottom-m)sc.scrollTop+=12}
+    requestAnimationFrame(loop)};
+  const press=(el,x,y,touch)=>{D={o,el,x,y,sx:x,sy:y,on:false,held:false,moved:false,touch};D.timer=setTimeout(()=>{if(D&&D.o===o&&!D.moved){D.held=true;o.onHold(el)}},330)};
+  const own=e=>{const r=root();return r&&r.contains(e.target)};
+  document.addEventListener("touchstart",e=>{if(!own(e)||e.target.closest("button:not([data-drag])"))return;const el=e.target.closest(o.item);if(!el)return;const t=e.touches[0];press(el,t.clientX,t.clientY,true)},{passive:true});
+  document.addEventListener("touchmove",e=>{if(!D||D.o!==o||!D.touch)return;const t=e.touches[0];
+    if(D.on){e.preventDefault();mv(t.clientX,t.clientY);return}
+    const far=Math.hypot(t.clientX-D.sx,t.clientY-D.sy)>8;
+    if(D.held){e.preventDefault();if(far){D.x=t.clientX;D.y=t.clientY;begin()}}
+    else if(far){D.moved=true;clearTimeout(D.timer)}},{passive:false});
+  document.addEventListener("touchend",e=>{if(!D||D.o!==o||!D.touch)return;if(D.on||D.held)e.preventDefault();end()},{passive:false});
+  document.addEventListener("touchcancel",()=>{if(D&&D.o===o&&D.touch){clearTimeout(D.timer);ghost.style.display="none";D.el.classList.remove("lift");D=null;hidePeek()}});
+  document.addEventListener("mousedown",e=>{if(!own(e)||e.button!==0||e.target.closest("button:not([data-drag])"))return;const el=e.target.closest(o.item);if(!el)return;e.preventDefault();press(el,e.clientX,e.clientY,false)});
+  document.addEventListener("mousemove",e=>{if(!D||D.o!==o||D.touch)return;
+    if(!D.on&&Math.hypot(e.clientX-D.sx,e.clientY-D.sy)>6){D.moved=true;D.x=e.clientX;D.y=e.clientY;clearTimeout(D.timer);begin()}
+    if(D.on)mv(e.clientX,e.clientY)});
+  document.addEventListener("mouseup",()=>{if(D&&D.o===o&&!D.touch)end()});
+}
+document.addEventListener("contextmenu",e=>{if(e.target.closest&&e.target.closest("[data-p],.ag"))e.preventDefault()});
+// Home: hold = history + colours, drag = move to dako, tap = options
+dragEngine({root:()=>$("homeBody"),item:"[data-p]",target:".dk[data-dako]",key:el=>el.dataset.p,scroller:()=>window,
+  onTap:el=>openPerson(el.dataset.p),
+  onHold:el=>showPeek(el.dataset.p,sel,true),
+  onDrop:(el,t)=>{const name=el.dataset.p,cur=whereIs(final(sel),name);if(cur&&cur.dako!==t.dataset.dako){moveTo(sel,name,t.dataset.dako);refresh();toast(`${name} → ${t.dataset.dako}`)}}});
+
+/* ================= 11-LINGGO REMINDER ================= */
+let DEMO=false;
+const demoTag=()=>DEMO?`<div class="demo">🧪 DEMO LANG — walang mababago sa totoong suguan</div>`:"";
+function cycleStatus(){
+  const w=Math.round((parse(nextSun())-parse(S.start))/DAY/7);
+  if(w<0)return{done:0,r:-1};
+  return{done:Math.floor(w/N),r:w%N,lastEnd:iso(addDays(parse(S.start),(Math.floor(w/N)*N-1)*7))};
+}
+function needsReminder(){const c=cycleStatus();return c.done>=1&&(S.ackCycle||0)<c.done}
+function reminderBanner(){
+  const c=cycleStatus();
+  if(needsReminder())return `<div class="remind"><div class="rt">🎉 Natapos na ang 11 Linggo ng ikot!</div><div class="rs">Napuntahan na ng mga guro ang lahat ng 11 dako (huling Linggo: ${fmt(c.lastEnd)}). Maaari ka nang mag-reset o magpatuloy.</div><div class="rb"><button class="btn r" data-rm="reset">🔄 I-reset ngayon</button><button class="btn o" data-rm="cont">▶ Magpatuloy</button></div></div>`;
+  if(c.r===N-1)return `<div class="remind soft"><div class="rt">⏳ Huling Linggo na ng ikot</div><div class="rs">Ang susunod na Linggo (${fmt(nextSun())}) ay Linggo 11 — ang huli sa ikot. Pagkatapos nito, ipapaalala ko sa iyo na mag-reset o magpatuloy.</div></div>`;
+  return "";
+}
+function openReminder(demo){
+  if(demo!==undefined)DEMO=!!demo;
+  const ns=nextSun(),wasDemo=DEMO;
+  openSheet(`${demoTag()}<div style="text-align:center;padding:6px 4px 0"><div style="font-size:44px">🎉</div><h3 style="font-size:19px;margin:6px 0 4px">Natapos na ang 11 Linggo!</h3>
+    <div class="sub" style="font-size:13px;color:var(--mut);line-height:1.5">Napuntahan na ng mga guro ang lahat ng 11 dako sa ikot na ito.<br>Maaari ka nang <b>mag-reset</b> o <b>magpatuloy</b>.</div></div>
+    <div class="note" style="margin:12px 0">🔄 <b>I-reset:</b> babalik sa Linggo 1 simula <b>${fmt(ns)}</b>. Maiiwan ang history.<br>▶ <b>Magpatuloy:</b> tuloy ang bagong ikot na may ibang magkakapares.</div>
+    <div class="sub" style="font-size:12px;color:var(--mut);margin-bottom:4px">Pagkapili mo, puwede mo pang ayusin ang mga guro, Set, at dako bago magsimula.</div>
+    <div class="btnrow"><button class="btn r" id="rmReset">🔄 I-reset ngayon</button><button class="btn o" id="rmCont">▶ Magpatuloy</button></div>`);
+  DEMO=wasDemo;
+  $("rmReset").onclick=()=>openArrange("reset");
+  $("rmCont").onclick=()=>openArrange("cont");
+}
+function ackCycle(){S.ackCycle=cycleStatus().done;persist();renderHome();toast("Tuloy ang suguan ▶")}
+
+/* ---------- ARRANGE (before a new ikot): sets, names, dako, slots ---------- */
+let AR=null;
+function openArrange(mode){const d=DEMO;AR={mode,sets:S.sets.map(a=>[...a]),D:[...S.D],slots:{...(S.slots||{})},pick:null,adding:false};DEMO=d;drawArrange()}
+function arChanged(){return JSON.stringify([AR.sets,AR.D,AR.slots])!==JSON.stringify([S.sets,S.D,S.slots||{}])}
+function drawArrange(keepScroll){
+  const sh=$("sheet"),st=keepScroll&&sh?sh.scrollTop:0,d=DEMO;
+  const ns=nextSun();
+  const col=(si)=>{const arr=AR.sets[si],orig=S.sets[si]||[];
+    return `<div class="agcol" data-col="${si}"><div class="aghd ${tc(SL(si))}"><b>SET ${SL(si)}</b><span>${arr.length}</span>${si>=2?`<button class="agx" data-rmset="${si}" title="Alisin">✕</button>`:""}</div>
+    ${arr.map((n,i)=>{const pk=AR.pick&&AR.pick.s===si&&AR.pick.i===i;const ch=orig[i]!==n;
+      return `<div class="ag ${pk?"pk":""} ${ch?"ch":""}" data-s="${si}" data-i="${i}"><span class="ix">${i+1}</span>${avatar(n,SL(si))}<span class="nm">${esc(n)}</span><button class="agE" data-ren="${si}:${i}" aria-label="Palitan ang pangalan">✎</button></div>`}).join("")}</div>`};
+  const totalSlots=AR.D.reduce((s,dk)=>s+((AR.slots[dk])||AR.sets.length),0),totalG=AR.sets.length*N;
+  openSheet(`${demoTag()}<h3 style="font-size:18px;margin-bottom:2px">${AR.mode==="reset"?"🔄 Bagong Suguan":"▶ Tuloy ang Suguan"} · Ayusin bago magsimula</h3>
+    <div class="sub" style="font-size:12.5px;color:var(--mut);line-height:1.5;margin:4px 0 10px">${AR.mode==="reset"?`Magsisimula sa <b>Linggo 1 — ${fmt(ns)}</b>.`:`Tuloy ang ikot simula <b>${fmt(ns)}</b>.`}</div>
+
+    <div class="sec">1 · MGA GURO AT SET</div>
+    <div class="note" style="margin-bottom:8px">✋ <b>I-hold</b> ang guro → history niya &nbsp;·&nbsp; ↔️ <b>I-hold at i-drag</b> sa ibang guro → magpapalit sila &nbsp;·&nbsp; 👆 <b>I-tap</b> ang dalawa → palit din &nbsp;·&nbsp; ✎ → palitan ang pangalan</div>
+    <div class="agtools"><button id="arMix">🔀 Paghaluin lahat ng Set</button><button id="arShuf">🔀 Haluin ang ayos lang</button><button id="arUndo" ${arChanged()?"":"disabled"}>↺ Ibalik</button></div>
+    <div class="agcols" style="grid-template-columns:repeat(${AR.sets.length},minmax(${AR.sets.length>2?150:0}px,1fr))">${AR.sets.map((_,si)=>col(si)).join("")}</div>
+    <div id="addSetHost">${AR.adding?`<div class="card" style="box-shadow:none;border:1.5px dashed var(--gm);margin-top:10px"><h3>➕ Set ${SL(AR.sets.length)}</h3><div class="sub">Ilagay ang 11 pangalan, isa bawat linya. Kapag may bagong Set, ${AR.sets.length+1} na guro na ang default sa bawat dako.</div><textarea id="newSet" style="min-height:200px" placeholder="Pangalan 1&#10;Pangalan 2&#10;…"></textarea><div class="lbl" style="margin-top:6px"><span></span><span class="c" id="nsC">0 / 11</span></div><div class="btnrow"><button class="btn g" id="nsGo">Idagdag ang Set</button><button class="btn o" id="nsNo">Kanselahin</button></div></div>`:`<button class="addset" id="addSet" ${AR.sets.length>=8?"disabled":""}>➕ Magdagdag ng Set (Set ${SL(AR.sets.length)})</button>`}</div>
+
+    <div class="sec">2 · MGA DAKO AT ILANG GURO <span>${totalSlots} puwesto · ${totalG} guro</span></div>
+    ${totalSlots>totalG?`<div class="note r" style="margin-bottom:8px">Mas marami ang kailangang guro (${totalSlots}) kaysa sa mayroon (${totalG}). Kukuha ang app sa ibang dako, kaya may ${totalSlots-totalG} dakong magkukulang ng 1 bawat Linggo (umiikot).</div>`:""}
+    <div class="dkl">${AR.D.map((dk,i)=>{const n=AR.slots[dk]||AR.sets.length;return `<div class="dkr"><span class="no">${i+1}</span><input data-dkn="${i}" value="${esc(dk)}"><div class="stp"><button data-sl="${i}" data-d="-1">−</button><b>${n}</b><button data-sl="${i}" data-d="1">+</button></div></div>`}).join("")}</div>
+
+    <div class="btnrow" style="margin-top:16px"><button class="btn g" id="arGo">✓ ${AR.mode==="reset"?"Simulan ang bagong suguan":"Ituloy ang suguan"}</button></div>
+    <div class="btnrow" style="margin-top:0"><button class="btn o" id="arBack">‹ Bumalik</button></div>`);
+  DEMO=d;
+  const sheet=$("sheet");if(st)sheet.scrollTop=st;
+  sheet.querySelectorAll("[data-ren]").forEach(b=>b.onclick=()=>{const[si,i]=b.dataset.ren.split(":").map(Number);openRename(si,i)});
+  sheet.querySelectorAll("[data-rmset]").forEach(b=>b.onclick=()=>{const si=+b.dataset.rmset;AR.sets.splice(si,1);AR.pick=null;drawArrange(true);toast("Inalis ang Set")});
+  $("arMix").onclick=()=>{const all=shuf(AR.sets.flat());AR.sets=AR.sets.map((_,si)=>all.slice(si*N,si*N+N));AR.pick=null;drawArrange(true);toast("Napaghalo ang lahat ng Set")};
+  $("arShuf").onclick=()=>{AR.sets=AR.sets.map(shuf);AR.pick=null;drawArrange(true);toast("Nahalo ang ayos")};
+  $("arUndo").onclick=()=>{AR.sets=S.sets.map(a=>[...a]);AR.D=[...S.D];AR.slots={...(S.slots||{})};AR.pick=null;drawArrange(true)};
+  if($("addSet"))$("addSet").onclick=()=>{AR.adding=true;drawArrange(true);$("newSet").focus()};
+  if($("newSet")){
+    const cnt=()=>{const n=$("newSet").value.split("\n").map(s=>s.trim()).filter(Boolean).length;$("nsC").textContent=n+" / 11"+(n===N?" ✓":"");$("nsC").className="c "+(n===N?"ok":"no")};
+    $("newSet").oninput=cnt;
+    $("nsNo").onclick=()=>{AR.adding=false;drawArrange(true)};
+    $("nsGo").onclick=()=>{const L=$("newSet").value.split("\n").map(s=>s.trim()).filter(Boolean);
+      if(L.length!==N){toast("Kailangan ng eksaktong 11 pangalan");return}
+      const all=new Set(AR.sets.flat());if(L.some(n=>all.has(n))||new Set(L).size!==N){toast("May dobleng pangalan");return}
+      AR.sets.push(L);AR.adding=false;drawArrange(true);toast("Naidagdag ang Set "+SL(AR.sets.length-1))};
+  }
+  sheet.querySelectorAll("[data-dkn]").forEach(inp=>inp.onchange=()=>{const i=+inp.dataset.dkn,v=inp.value.trim(),old=AR.D[i];
+    if(!v||AR.D.some((x,j)=>j!==i&&x===v)){toast("Hindi puwede ang pangalang iyan");inp.value=old;return}
+    AR.D[i]=v;if(AR.slots[old]){AR.slots[v]=AR.slots[old];delete AR.slots[old]}});
+  sheet.querySelectorAll("[data-sl]").forEach(b=>b.onclick=()=>{const dk=AR.D[+b.dataset.sl];let n=(AR.slots[dk]||AR.sets.length)+(+b.dataset.d);n=Math.max(1,Math.min(5,n));if(n===AR.sets.length)delete AR.slots[dk];else AR.slots[dk]=n;drawArrange(true)});
+  $("arBack").onclick=()=>openReminder();
+  $("arGo").onclick=applyArrange;
+}
+function openRename(si,i){
+  const old=AR.sets[si][i];
+  const host=document.createElement("div");host.className="rnpop";
+  host.innerHTML=`<div class="rnbox"><b>✏️ Palitan ang pangalan</b><input id="rnA" value="${esc(old)}"><div class="btnrow"><button class="btn g" id="rnAGo">I-save</button><button class="btn o" id="rnANo">Kanselahin</button></div></div>`;
+  document.body.appendChild(host);$("rnA").focus();$("rnA").select();
+  const close=()=>host.remove();
+  $("rnANo").onclick=close;host.onclick=e=>{if(e.target===host)close()};
+  $("rnAGo").onclick=()=>{const v=$("rnA").value.trim();if(!v){toast("Walang laman");return}
+    if(v!==old&&AR.sets.flat().includes(v)){toast("May guro nang ganyang pangalan");return}
+    AR.sets[si][i]=v;(AR.renames=AR.renames||{})[old]=v;close();drawArrange(true)};
+}
+function applyArrange(){
+  const ns=nextSun();
+  if(DEMO){closeSheet();openSheet(`<div class="demo">🧪 DEMO LANG</div><div style="text-align:center;padding:10px 4px"><div style="font-size:42px">✅</div><h3 style="font-size:18px;margin:6px 0">Tapos ang demo!</h3><div class="sub" style="font-size:13px;color:var(--mut);line-height:1.5">Ganito ang mangyayari pagkatapos ng 11 Linggo.<br>Sa totoong gamit, dito na magsisimula ang bagong ikot gamit ang mga Set, pangalan, at dakong inayos mo.<br><b>Walang nabago sa suguan mo.</b></div><div class="btnrow"><button class="btn g" id="dmOk">Sige, salamat</button></div></div>`);$("dmOk").onclick=closeSheet;return}
+  const A=AR;lockPast();
+  // carry renames into history
+  Object.entries(A.renames||{}).forEach(([o,n])=>renameGuroHistoryOnly(o,n));
+  // carry dako renames
+  S.D.forEach((old,i)=>{if(A.D[i]&&A.D[i]!==old)renameDako(old,A.D[i])});
+  S.sets=A.sets;S.D=A.D;S.slots=A.slots;
+  const mode=A.mode;closeSheet();
+  if(mode==="reset")doReset(ns,false);else{persist();memo={};ackCycle();refresh()}
+}
+function renameGuroHistoryOnly(o,n){
+  Object.values(S.history).forEach(h=>h.list.forEach(x=>{if(x.ppl)x.ppl=x.ppl.map(v=>v===o?n:v);if(x.a===o)x.a=n;if(x.b===o)x.b=n}));
+  Object.keys(S.absent).forEach(k=>S.absent[k]=S.absent[k].map(v=>v===o?n:v));
+  Object.keys(S.moves).forEach(k=>{const m=S.moves[k];if(m[o]!==undefined){m[n]=m[o];delete m[o]}});
+}
+// arrange: hold = history, drag onto another guro = swap, tap two = swap
+dragEngine({root:()=>$("sheet"),item:".ag",target:".ag",key:el=>AR.sets[+el.dataset.s][+el.dataset.i],scroller:()=>$("sheet"),
+  onTap:el=>{const s=+el.dataset.s,i=+el.dataset.i;
+    if(!AR.pick){AR.pick={s,i};return drawArrange(true)}
+    if(AR.pick.s===s&&AR.pick.i===i){AR.pick=null;return drawArrange(true)}
+    swapAR(AR.pick,{s,i});AR.pick=null;drawArrange(true)},
+  onHold:el=>showPeek(AR.sets[+el.dataset.s][+el.dataset.i],nextSun(),false),
+  onDrop:(el,t)=>{swapAR({s:+el.dataset.s,i:+el.dataset.i},{s:+t.dataset.s,i:+t.dataset.i});AR.pick=null;drawArrange(true);toast("Nagpalit ng puwesto")}});
+function swapAR(a,b){const x=AR.sets[a.s][a.i];AR.sets[a.s][a.i]=AR.sets[b.s][b.i];AR.sets[b.s][b.i]=x}
+
+/* ================= MGA GURO ================= */
+const MON=["Enero","Pebrero","Marso","Abril","Mayo","Hunyo","Hulyo","Agosto","Setyembre","Oktubre","Nobyembre","Disyembre"];
+const QN=["Unang","Ikalawang","Ikatlong","Ikaapat na"];
+let absMode="month",absRef=(()=>{const d=today();d.setDate(1);return d})();
+function periodOf(mode,ref){
+  const y=ref.getFullYear(),m=ref.getMonth();
+  if(mode==="month"){const a=new Date(y,m,1),b=new Date(y,m+1,0);return{from:iso(a),to:iso(b),label:MON[m]+" "+y,range:"Bawat Linggo ng buwan"}}
+  const q=Math.floor(m/3),a=new Date(y,q*3,1),b=new Date(y,q*3+3,0);
+  return{from:iso(a),to:iso(b),label:`${QN[q]} Quarter ${y}`,range:`${MON[q*3]} – ${MON[q*3+2]} (Q${q+1})`};
+}
+function absCount(name,from,to){return Object.entries(S.absent||{}).filter(([k,v])=>k>=from&&k<=to&&v.includes(name)).length}
+function sundaysIn(from,to){let n=0,d=sunOnOrAfter(parse(from));while(iso(d)<=to){if(getSuguan(iso(d)))n++;d=addDays(d,7)}return n}
+function renderGuro(){
+  const P=periodOf(absMode,absRef);
+  document.querySelectorAll(".mini button").forEach(b=>b.classList.toggle("on",b.dataset.m===absMode));
+  $("pLabel").textContent=P.label;$("pRange").textContent=P.range;
+  const q=($("q").value||"").toLowerCase(),all=allNames();
+  const cnt=Object.fromEntries(all.map(n=>[n,absCount(n,P.from,P.to)]));
+  const total=all.reduce((s,n)=>s+cnt[n],0),withAbs=all.filter(n=>cnt[n]).length;
+  $("abStats").innerHTML=`<div class="r"><b>${total}</b>Kabuuang absent</div><div><b>${withAbs}</b>Guro na may absent</div><div><b>${sundaysIn(P.from,P.to)}</b>Linggo na may suguan</div>`;
+  let names=all.filter(n=>n.toLowerCase().includes(q));
+  if($("sortAbs").checked)names=names.sort((a,b)=>cnt[b]-cnt[a]);
+  const k1=iso(addDays(today(),1));
+  $("gList").innerHTML=names.map(n=>{
+    const recs=records(n,k1),last=recs.find(r=>!r.absent),been=Object.keys(beenMap(n,k1)).length;
+    return `<button class="gc" data-n="${esc(n)}">${avatar(n)}<div class="pi"><div class="pn">${esc(n)} <span class="setb ${tc(setOf(n))}">Set ${setOf(n)}</span></div><small>${last?"Huli: "+esc(last.dako)+" · "+short(last.k):"Wala pang suguan"}</small><div class="prog"><i style="width:${been/11*100}%"></i></div><small>${been} sa 11 dako na ang napuntahan</small></div><div class="abn ${cnt[n]?"has":""}"><b>${cnt[n]}</b>absent</div></button>`}).join("")||`<div class="emptyst">Walang tugma.</div>`;
+}
+document.querySelectorAll(".mini button").forEach(b=>b.onclick=()=>{absMode=b.dataset.m;renderGuro()});
+$("pPrev").onclick=()=>{absRef.setMonth(absRef.getMonth()-(absMode==="month"?1:3));renderGuro()};
+$("pNext").onclick=()=>{absRef.setMonth(absRef.getMonth()+(absMode==="month"?1:3));renderGuro()};
+$("sortAbs").onchange=renderGuro;$("q").oninput=renderGuro;
+$("gList").onclick=e=>{const b=e.target.closest("[data-n]");if(b)openProfile(b.dataset.n)};
+function absBreakdown(name){
+  const ks=Object.keys(S.absent||{}).filter(k=>S.absent[k].includes(name)).sort();
+  const now=today(),curM=now.getFullYear()+"-"+now.getMonth(),curQ=now.getFullYear()+"-Q"+Math.floor(now.getMonth()/3);
+  const byM={[curM]:0},byQ={[curQ]:0};
+  ks.forEach(k=>{const d=parse(k),m=d.getFullYear()+"-"+d.getMonth(),q=d.getFullYear()+"-Q"+Math.floor(d.getMonth()/3);byM[m]=(byM[m]||0)+1;byQ[q]=(byQ[q]||0)+1});
+  const sortKeys=o=>Object.keys(o).sort((a,b)=>{const pa=a.split(/-Q?/).map(Number),pb=b.split(/-Q?/).map(Number);return pb[0]-pa[0]||pb[1]-pa[1]});
+  const mRows=sortKeys(byM).map(k=>{const[y,m]=k.split("-").map(Number);return `<tr class="${k===curM?"cur":""}"><td>${MON[m]} ${y}${k===curM?" (ngayon)":""}</td><td class="n ${byM[k]?"has":""}">${byM[k]}</td></tr>`}).join("");
+  const qRows=sortKeys(byQ).map(k=>{const[y,q]=k.split("-Q").map(Number);return `<tr class="${k===curQ?"cur":""}"><td>Q${q+1} ${y} · ${MON[q*3].slice(0,3)}–${MON[q*3+2].slice(0,3)}${k===curQ?" (ngayon)":""}</td><td class="n ${byQ[k]?"has":""}">${byQ[k]}</td></tr>`}).join("");
+  return `<div class="sec">ABSENT BAWAT QUARTER</div><table class="abt"><tr><th>Quarter</th><th style="text-align:right">Absent</th></tr>${qRows}</table>
+    <div class="sec">ABSENT BAWAT BUWAN</div><table class="abt"><tr><th>Buwan</th><th style="text-align:right">Absent</th></tr>${mRows}</table>`;
+}
+function renderLinggo(){
+  const ks=Object.keys(S.history).sort().reverse();
+  $("g-linggo").innerHTML=ks.length?ks.map((k,i)=>{const f=final(k);if(!f)return"";const mv=f.rows.flatMap(r=>r.people.filter(p=>p.tag==="inilipat").map(p=>`🔀 ${esc(p.name)}: ${esc(p.from)} → ${esc(r.dako)}`));
+    return `<details ${i===0?"open":""}><summary>${fmt(k)}<span>L${f.r+1}${f.abs.size?` · ${f.abs.size} absent`:""}${f.moved?` · ${f.moved} inilipat`:""}</span></summary><div class="in">${f.rows.map(r=>`<div><b>${esc(r.dako)}</b> — ${active(r).map(p=>`<span class="${tc(p.set)}">${esc(p.name)}${p.tag==="pamalit"?" ↩":p.tag==="inilipat"?" 🔀":""}</span>`).join(", ")||"—"}</div>`).join("")}${f.abs.size?`<div style="color:var(--r);font-weight:600;margin-top:6px">❌ Absent: ${[...f.abs].map(esc).join(", ")}</div>`:""}${mv.length?`<div style="color:var(--bl);font-weight:600;margin-top:4px">${mv.join("<br>")}</div>`:""}</div></details>`}).join(""):`<div class="emptyst"><b>📭</b>Wala pang naitalang suguan.</div>`;
+}
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x===b));$("g-guro").classList.toggle("hide",b.dataset.s!=="guro");$("g-linggo").classList.toggle("hide",b.dataset.s!=="linggo")});
+
+/* ================= BUONG IKOT ================= */
+let ikotKs=[];
+function renderIkot(){
+  const anchor=getSuguan(sel)?sel:getSuguan(nextSun())?nextSun():S.start;
+  const w=Math.max(0,Math.round((parse(anchor)-parse(S.start))/DAY/7));
+  const c0=iso(addDays(parse(S.start),(w-w%N)*7));
+  ikotKs=Array.from({length:N},(_,i)=>iso(addDays(parse(c0),i*7)));
+  const fs=ikotKs.map(final);
+  $("ikotSub").textContent=`${fmt(ikotKs[0])} hanggang ${fmt(ikotKs[N-1])}`;
+  let h=`<tr><th class="f">Dako</th>${ikotKs.map((k,i)=>`<th class="${k===sel?"cur":""}">Linggo ${i+1}<small>${short(k)}</small></th>`).join("")}</tr>`;
+  S.D.forEach((d,i)=>{h+=`<tr><td class="f">${esc(d)}</td>${fs.map((f,j)=>{const r=f&&f.rows[i];if(!r)return`<td>—</td>`;return `<td class="${ikotKs[j]===sel?"cur":""}">${r.people.map(p=>{const nm=esc(p.name)+(p.tag==="pamalit"?" ↩":p.tag==="inilipat"?" 🔀":"");return p.tag==="absent"||p.tag==="lumipat"?`<s>${nm}</s>`:`<span class="${tc(p.set)}">${nm}</span>`}).join("<br>")}</td>`}).join("")}</tr>`});
+  $("matrix").innerHTML=h;
+  let visits=true,weekly=true,pairOk=true;const seen=new Set(),pairs=new Set();
+  ikotKs.map(getSuguan).forEach(gg=>{if(!gg)return;const names=new Set();gg.list.forEach(x=>{const ppl=x.ppl||[x.a,x.b];ppl.forEach(n=>{names.add(n);const kk=n+"|"+x.dako;if(seen.has(kk))visits=false;seen.add(kk)});for(let a=0;a<ppl.length;a++)for(let b=a+1;b<ppl.length;b++){const p=ppl[a]+"|"+ppl[b];if(pairs.has(p))pairOk=false;pairs.add(p)}});if(names.size!==(gg.list[0].ppl||[0,0]).length*N)weekly=false});
+  const c=(ok,big,t)=>`<div class="${ok?"":"bad"}"><b>${ok?"✓":"✕"} ${big}</b>${t}</div>`;
+  $("checks").innerHTML=c(visits,"Walang ulit","Isang beses lang sa bawat dako")+c(weekly,`${allNames().length} bawat Linggo`,"Lahat may tungkulin")+c(pairOk,"Iba-ibang pares","Walang magkapares na nauulit");
+}
+$("copyAll").onclick=()=>copy(ikotKs.map(dayText).filter(Boolean).join("\n\n────────\n\n"));
+
+/* ================= AYUSIN ================= */
+const linesOf=el=>el.value.split("\n").map(s=>s.trim()).filter(Boolean);
+let draftSets=null;
+function renderAyos(force){
+  if(!force&&document.activeElement&&document.activeElement.tagName==="TEXTAREA")return;
+  draftSets=S.sets.map(a=>[...a]);
+  drawSetsBox();
+  $("taD").value=S.D.join("\n");countD();
+  if(!resetDate.value)resetDate.value=nextSun();
+  $("curStart").innerHTML=`📌 Kasalukuyang suguan: nagsimula noong <b>${fmt(S.start)}</b>.`;
+  $("slotList").innerHTML=S.D.map((dk,i)=>{const n=needOf(dk);return `<div class="dkr"><span class="no">${i+1}</span><span class="dkname">${esc(dk)}</span><div class="stp"><button data-ss="${i}" data-d="-1">−</button><b>${n}</b><button data-ss="${i}" data-d="1">+</button></div></div>`}).join("");
+}
+function drawSetsBox(){
+  $("setsBox").innerHTML=draftSets.map((a,si)=>`<div><div class="lbl"><span class="${tc(SL(si))}">● SET ${SL(si)}</span><span class="c" id="cS${si}"></span>${si>=2?`<button class="lnk" data-dels="${si}">✕ Alisin</button>`:""}</div><textarea data-set="${si}">${esc(a.join("\n"))}</textarea></div>`).join("");
+  $("setsBox").querySelectorAll("textarea").forEach(t=>{t.oninput=()=>cntS(t);cntS(t)});
+  $("setsBox").querySelectorAll("[data-dels]").forEach(b=>b.onclick=()=>{draftSets=[...$("setsBox").querySelectorAll("textarea")].map(linesOf);draftSets.splice(+b.dataset.dels,1);drawSetsBox();toast("Pindutin ang I-save para tuluyang alisin")});
+  $("addSetA").textContent=`➕ Magdagdag ng Set ${SL(draftSets.length)}`;$("addSetA").disabled=draftSets.length>=8;
+}
+function cntS(t){const n=linesOf(t).length,c=$("cS"+t.dataset.set);c.textContent=n+" / 11"+(n===N?" ✓":"");c.className="c "+(n===N?"ok":"no")}
+function countD(){const n=linesOf($("taD")).length;$("cD").textContent=n+" / 11"+(n===N?" ✓":"");$("cD").className="c "+(n===N?"ok":"no")}
+$("taD").addEventListener("input",countD);
+$("addSetA").onclick=()=>{draftSets=[...$("setsBox").querySelectorAll("textarea")].map(linesOf);draftSets.push([]);drawSetsBox();const ts=$("setsBox").querySelectorAll("textarea");ts[ts.length-1].focus()};
+$("saveNames").onclick=()=>{
+  const sets=[...$("setsBox").querySelectorAll("textarea")].map(linesOf),D2=linesOf($("taD"));
+  if(sets.some(a=>a.length!==N)||D2.length!==N){toast("Kailangan ng tig-11 sa bawat listahan");return}
+  const all=sets.flat();if(new Set(all).size!==all.length){toast("May dobleng pangalan");return}
+  if(new Set(D2).size!==N){toast("May dobleng dako");return}
+  lockPast();
+  // dako renamed in place (same position) → keep history in sync
+  S.D.forEach((old,i)=>{if(D2[i]!==old&&!S.D.includes(D2[i]))renameDako(old,D2[i])});
+  // guro renamed in place (same set & position) → keep history in sync
+  S.sets.forEach((a,si)=>a.forEach((old,i)=>{const nw=sets[si]&&sets[si][i];if(nw&&nw!==old&&!all.includes(old))renameGuroHistoryOnly(old,nw)}));
+  S.sets=sets;S.D=D2;persist();document.activeElement.blur();refresh();renderAyos(true);toast("Na-save ✓");
+};
+$("sample").onclick=()=>{draftSets=[[...SAMPLE_A],[...SAMPLE_B]];drawSetsBox();$("taD").value=SAMPLE_D.join("\n");countD();toast("Pindutin ang I-save")};
+$("slotList").onclick=e=>{const b=e.target.closest("[data-ss]");if(!b)return;const dk=S.D[+b.dataset.ss];let n=needOf(dk)+(+b.dataset.d);n=Math.max(1,Math.min(5,n));setSlots(S,dk,n);persist();refresh();toast(`${dk}: ${n} guro`)};
+function twoTap(btn,label,fn){let arm=false;btn.onclick=()=>{if(!arm){arm=true;btn.textContent="Sigurado? Pindutin ulit";setTimeout(()=>{arm=false;btn.textContent=label},3500);return}arm=false;btn.textContent=label;fn()}}
+function doReset(ns,shuffle){
+  lockPast();
+  Object.keys(S.history).forEach(k=>{if(k>=ns)delete S.history[k]});
+  Object.keys(S.moves||{}).forEach(k=>{if(k>=ns)delete S.moves[k]});
+  if(shuffle)S.sets=S.sets.map(shuf);
+  S.start=ns;if(S.histFrom&&S.histFrom>ns)S.histFrom=ns;S.ackCycle=0;
+  persist();sel=ns;refresh();showTab("home");toast("Bagong suguan simula "+short(ns)+" ✓");
+}
+twoTap($("resetSuguan"),"🔄 I-reset ang Suguan",()=>{
+  if(!resetDate.value){toast("Pumili ng petsa");return}
+  doReset(iso(sunOnOrAfter(parse(resetDate.value))),$("resetShuffle").checked);
+});
+twoTap($("resetHist"),"🗑 Burahin ang History",()=>{S.history={};S.absent={};S.moves={};S.histFrom=nextSun();persist();refresh();toast("Nabura ang history")});
+
+/* ================= BACKUP ================= */
+$("bkCopy").onclick=()=>{const data=JSON.stringify({app:"suguan",v:1,saved:new Date().toISOString(),S});
+  if(NATIVE&&NATIVE.share){try{NATIVE.share(data,"Suguan backup");return}catch(e){}}copy(data)};
+$("bkLoad").onclick=()=>{try{const o=JSON.parse($("bkText").value.trim());const s=o.S||o;
+  if(!s.sets||!s.D||!s.start)throw 0;S={...S,...s};persist();$("bkText").value="";refresh();showTab("home");toast("Naibalik ang backup ✓")}catch(e){toast("Hindi tamang backup")}};
+
+/* ================= NAV ================= */
+function showTab(t){document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));["home","guro","ikot","ayos"].forEach(v=>$("v-"+v).classList.toggle("hide",v!==t));try{window.scrollTo(0,0)}catch(e){}if(t==="ikot")renderIkot();if(t==="ayos")renderAyos(true)}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+
+if(!S.absent)S.absent={};if(!S.moves)S.moves={};
+// Android back button: close popups first, then go back to Home, then exit
+window.suguanBack=function(){
+  if(document.querySelector(".rnpop")){document.querySelector(".rnpop").remove();return true}
+  if($("sheetHost").innerHTML){closeSheet();return true}
+  if($("v-home").classList.contains("hide")){showTab("home");return true}
+  return false};
+refresh();
+let demoSeen=false;try{demoSeen=localStorage.getItem("suguanDemo2")==="1"}catch(e){}
+if(needsReminder())setTimeout(()=>openReminder(false),400);
+else if(!demoSeen){setTimeout(()=>openReminder(true),500);try{localStorage.setItem("suguanDemo2","1")}catch(e){}}
+$("tryRemind").onclick=()=>openReminder(true);
+</script>
+</body>
+</html>

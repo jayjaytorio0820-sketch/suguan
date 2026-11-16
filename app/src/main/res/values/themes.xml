@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Suguan" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/green</item>
+        <item name="android:statusBarColor">@color/green</item>
+        <item name="android:colorAccent">@color/green</item>
+    </style>
+</resources>

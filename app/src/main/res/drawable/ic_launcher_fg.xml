@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- green / white / red bars -->
+    <path android:fillColor="#18A058" android:pathData="M30,32h16v44h-16z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M46,32h16v44h-16z"/>
+    <path android:fillColor="#C8102E" android:pathData="M62,32h16v44h-16z"/>
+    <!-- location pins (dako) -->
+    <path android:fillColor="#FFFFFF" android:pathData="M38,40c-3.3,0 -6,2.7 -6,6c0,4.5 6,11 6,11s6,-6.5 6,-11c0,-3.3 -2.7,-6 -6,-6zM38,48.2c-1.2,0 -2.2,-1 -2.2,-2.2s1,-2.2 2.2,-2.2s2.2,1 2.2,2.2s-1,2.2 -2.2,2.2z"/>
+    <path android:fillColor="#0B6B3A" android:pathData="M54,51c-3.3,0 -6,2.7 -6,6c0,4.5 6,11 6,11s6,-6.5 6,-11c0,-3.3 -2.7,-6 -6,-6zM54,59.2c-1.2,0 -2.2,-1 -2.2,-2.2s1,-2.2 2.2,-2.2s2.2,1 2.2,2.2s-1,2.2 -2.2,2.2z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M70,40c-3.3,0 -6,2.7 -6,6c0,4.5 6,11 6,11s6,-6.5 6,-11c0,-3.3 -2.7,-6 -6,-6zM70,48.2c-1.2,0 -2.2,-1 -2.2,-2.2s1,-2.2 2.2,-2.2s2.2,1 2.2,2.2s-1,2.2 -2.2,2.2z"/>
+</vector>
